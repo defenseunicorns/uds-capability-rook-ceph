@@ -68,7 +68,5 @@ Node Specs:
 
 ## (potential) TODOs 
 
-- [ ] Update ZarfPackageConfig to include DUBBD-RKE2 skeleton package
 - [ ] Confirm default rook-ceph helm chart values are what is needed/desired
 - [ ] Validate scripts/check.sh to ensure nodes are ready for rook-ceph
-- [ ] Variables for metallb/ipaddresspool.yaml IP Pool
