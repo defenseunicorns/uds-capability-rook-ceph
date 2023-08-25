@@ -49,7 +49,7 @@ During this install, you will see various jobs/pods being created (took ~17 minu
 1. Zarf (v0.29.0) & Metallb
    ```
    zarf -a amd64 init --components git-server --confirm
-   zarf -a amd64 package deploy oci://docker pull ghcr.io/defenseunicorns/packages/metallb:0.0.1-amd64 # must set IP_ADDRESS_POOL zarf variable
+   zarf -a amd64 package deploy oci://ghcr.io/defenseunicorns/packages/metallb:0.0.1-amd64 # must set IP_ADDRESS_POOL zarf variable
    ```
 
 1. DUBBD-RKE2
