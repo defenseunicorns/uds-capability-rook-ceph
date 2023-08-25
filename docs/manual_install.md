@@ -11,9 +11,8 @@
 1. Create the `rook-ceph` namespace and an `imagePullSecret` for registry1.dso.mil:
    ```console
    kubectl create ns rook-ceph
-   kubectl apply -n rook-ceph -f ~/bigbang/local/private-registry.yaml
    kubectl create -n rook-ceph secret docker-registry private-registry --docker-server=registry1.dso.mil --docker-username=<your-username> --docker-password=<your-token>
-   # Patch the default service account due to a limitation with rook/ceph private registry pulls
+   # Patch the default service account due to a limitation with rook/ceph private registry pulls - https://github.com/rook/rook/issues/12786
    kubectl patch serviceaccount default -n rook-ceph -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
    ```
 

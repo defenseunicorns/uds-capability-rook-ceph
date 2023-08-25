@@ -20,8 +20,5 @@ cephClusterSpec:
     #   deviceFilter: "^sd[b-c]"
     #   metadataDevice: "sdb"
 
-# Disable cephFS until RWX need arises
-cephFileSystems: null
-
 imagePullSecrets:
   - name: private-registry

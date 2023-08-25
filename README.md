@@ -1,5 +1,8 @@
 # UDS Package Rook-Ceph
 
+> [!WARNING]
+> This is currently not a functional package due to [an issue with Zarf mutation](https://github.com/defenseunicorns/zarf/issues/1988). You can deploy the same pieces without zarf by following the instructions in [the manual install doc](./docs/manual_install.md).
+
 ## Pre-requisites 
 1. RKE2 cluster
 2. Cluster nodes meet the [requirements for Rook-Ceph](https://rook.github.io/docs/rook/v1.12/Getting-Started/Prerequisites/prerequisites/)
