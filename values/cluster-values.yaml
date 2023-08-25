@@ -1,0 +1,27 @@
+cephClusterSpec:
+  cephVersion:
+    image: registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6
+
+  network:
+    # Use host networking to avoid CNI causing storage issues
+    provider: host
+    # Encrypt connections to/from storage
+    connections:
+      encryption:
+        enabled: true
+
+  # Use select devices for storage
+  storage:
+    useAllNodes: true
+    # Configure device filter/separate metadata device
+    # Metadata device should be smaller + faster ideally
+    # useAllDevices: false
+    # config:
+    #   deviceFilter: "^sd[b-c]"
+    #   metadataDevice: "sdb"
+
+# Disable cephFS until RWX need arises
+cephFileSystems: null
+
+imagePullSecrets:
+  - name: private-registry
