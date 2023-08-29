@@ -5,6 +5,12 @@ metadata:
   version: "0.0.1"
   architecture: amd64
 
+variables:
+  - name: DEVICE_FILTER
+    description: "Regular expression matching all devices to use for Ceph storage"
+    default: ""
+    prompt: false
+
 components:
   - name: rook-ceph-operator
     required: true
@@ -19,6 +25,21 @@ components:
       - registry1.dso.mil/ironbank/rook/ceph:v1.12.2
   - name: rook-ceph-cluster
     required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              if [ "${ZARF_VAR_DEVICE_FILTER}" = "" ]; then
+                echo true
+              else
+                echo false
+              fi
+            description: "Determine if device filter is being used"
+            setVariables:
+              - name: USE_ALL_DEVICES
+        after:
+          - cmd: "./zarf tools wait-for cephcluster -n rook-ceph rook-ceph '{.status.phase}'=Ready --timeout=20m"
+            description: "Wait for ceph cluster to be ready"
     charts:
       - name: rook-ceph-cluster
         version: v1.12.2
@@ -35,8 +56,3 @@ components:
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.2.1
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.2.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.5.0
-    actions:
-      onDeploy:
-        after:
-          - cmd: "./zarf tools wait-for cephcluster -n rook-ceph rook-ceph '{.status.phase}'=Ready --timeout=20m"
-            description: "Wait for ceph cluster to be ready"
