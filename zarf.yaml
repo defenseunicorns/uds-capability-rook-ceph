@@ -26,7 +26,7 @@ components:
         url: https://charts.rook.io/release
         valuesFiles:
           - values/cluster-values.yaml
-    images: 
+    images:
       - registry1.dso.mil/ironbank/rook/ceph:v1.12.2
       - registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6
       - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
@@ -38,5 +38,5 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: "./zarf tools kubectl wait --for=condition=ready cephcluster -n rook-ceph rook-ceph --timeout=20m"
+          - cmd: "./zarf tools wait-for cephcluster -n rook-ceph rook-ceph '{.status.phase}'=Ready --timeout=20m"
             description: "Wait for ceph cluster to be ready"
