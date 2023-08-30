@@ -41,6 +41,12 @@ components:
         after:
           - cmd: "./zarf tools wait-for cephcluster -n rook-ceph rook-ceph '{.status.phase}'=Ready --timeout=20m"
             description: "Wait for ceph cluster to be ready"
+          - cmd: "./zarf tools wait-for cephobjectstore -n rook-ceph ceph-objectstore '{.status.phase}'=Ready --timeout=20m"
+            description: "Wait for ceph objectstore to be ready"
+          - cmd: "./zarf tools wait-for cephfilesystem -n rook-ceph ceph-filesystem '{.status.phase}'=Ready --timeout=20m"
+            description: "Wait for ceph filesystem to be ready"
+          - cmd: "./zarf tools wait-for cephblockpool -n rook-ceph ceph-blockpool '{.status.phase}'=Ready --timeout=20m"
+            description: "Wait for ceph blockpool to be ready"
     charts:
       - name: rook-ceph-cluster
         version: v1.12.2
