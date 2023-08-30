@@ -28,7 +28,9 @@ zarf package create --architecture amd64 --confirm
 
 ## Deploy
 
-To deploy the package:
+This package has a single configuration option for `device_filter` in the `zarf-config.yaml`. This value can be set to a regex that matches the devices/drives that you want to use for ceph storage. For example, if you wanted to use all devices starting `sd` you could set to `^sd.`. You can also leave the value as an empty string to use all unformatted devices/partitions.
+
+Then to deploy the package:
 ```console
 zarf package deploy zarf-package-rook-ceph-amd64-*.tar.zst --confirm
 ```
