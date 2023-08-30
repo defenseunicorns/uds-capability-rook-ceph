@@ -7,7 +7,7 @@ metadata:
 
 variables:
   - name: DEVICE_FILTER
-    description: "Regular expression matching all devices to use for Ceph storage"
+    description: "Regular expression matching all devices to use for Ceph storage, example '^sd.'"
     default: ""
     prompt: false
 
@@ -34,7 +34,8 @@ components:
               else
                 echo false
               fi
-            description: "Determine if device filter is being used"
+            description: "Determine whether to use all devices"
+            mute: true
             setVariables:
               - name: USE_ALL_DEVICES
         after:
