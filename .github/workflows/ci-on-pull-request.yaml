@@ -19,6 +19,16 @@ jobs:
     needs: yaml-lint
     if: needs.yaml-lint.result == 'success' || needs.yaml-lint.result == 'skipped'
     steps:
+      - name: Free GH runner space
+        run: |
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          df -h
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -39,3 +49,11 @@ jobs:
       - name: Create Package
         # Skip SBOM since package is used for internal testing, not publishing
         run: make create-zarf-package extra_create_args="--skip-sbom"
+
+      - name: Install Minikube
+        run: |
+          curl -LO https://storage.googleapis.com/minikube/releases/v1.31.2/minikube-linux-amd64
+          sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+      - name: Create Cluster
+        run: make create-test-cluster

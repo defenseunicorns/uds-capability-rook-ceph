@@ -16,3 +16,12 @@ create-zarf-package: ## Build the zarf package.
 publish-zarf-package: ## Publish the zarf package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
 	zarf package publish . oci://ghcr.io/defenseunicorns/packages
+
+.PHONY: create-cluster
+create-cluster: ## Create a test cluster with minkube
+	minikube start --disk-size=20g --extra-disks=1 --driver kvm2
+
+.PHONY: destroy-cluster
+destroy-cluster: ## Destroy the test cluster
+	minikube stop
+	minikube delete
