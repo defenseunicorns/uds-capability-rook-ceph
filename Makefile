@@ -19,7 +19,7 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with minkube
-	minikube start --disk-size=20g --extra-disks=1 --driver kvm2
+	minikube start --disk-size=20g --driver docker
 
 .PHONY: stop-cluster
 stop-cluster: ## Stop the test cluster
