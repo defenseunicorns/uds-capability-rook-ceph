@@ -57,6 +57,6 @@ jobs:
 
       - name: Create Cluster
         run: make create-cluster
-      
+
       - name: Destroy Cluster
         run: make destroy-cluster
