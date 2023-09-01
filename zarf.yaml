@@ -4,6 +4,7 @@ metadata:
   description: "UDS Package Rook Ceph"
   version: "0.0.0"
   architecture: amd64
+  authors: "@mjnagel @andrewg-xyz"
 
 variables:
   - name: DEVICE_FILTER
