@@ -1,5 +1,10 @@
 # UDS Package Rook-Ceph
 
+This package provides a deployment of [Rook](https://rook.io/) within a zarf package. Rook/Ceph is preconfigured in this package to provide:
+- Block storage for typical PVC usage (`ceph-block` storage class)
+- RWX storage (`ceph-filesystem` storage class)
+- S3-compatible object storage (`ceph-bucket` storage class) 
+
 ## Pre-requisites
 - Zarf is installed locally with a minimum version of [v0.29.1](https://github.com/defenseunicorns/zarf/releases/tag/v0.29.1)
 - A working Kubernetes cluster on v1.26+ and a working kube context pointing to the cluster (`kubectl get nodes` <-- this command works)
@@ -34,3 +39,7 @@ Then to deploy the package:
 ```console
 zarf package deploy zarf-package-rook-ceph-amd64-*.tar.zst --confirm
 ```
+
+## Storage Provisioning
+
+The default storage class will be configured to be `ceph-block`, which provides a standard RWO experience for most applications and PVC needs. To use the RWX capability you can create a PVC with the `ceph-filesystem` storage class. For an S3 compatible bucket you can create a custom resource, `ObjectBucketClaim`, such as the example [here](./examples/bucket.yaml).
