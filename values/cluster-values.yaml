@@ -14,7 +14,7 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     # Configure device filter
-    useAllDevices: ###ZARF_VAR_USE_ALL_DEVICES###
+    useAllDevices: true
     config:
       deviceFilter: "###ZARF_VAR_DEVICE_FILTER###"
       # Separate metadata device to smaller + faster device

@@ -27,17 +27,6 @@ components:
     required: true
     actions:
       onDeploy:
-        before:
-          - cmd: |
-              if [ "${ZARF_VAR_DEVICE_FILTER}" = "" ]; then
-                echo true
-              else
-                echo false
-              fi
-            description: "Determine whether to use all devices"
-            mute: true
-            setVariables:
-              - name: USE_ALL_DEVICES
         after:
           - cmd: "./zarf tools wait-for cephcluster -n rook-ceph rook-ceph '{.status.phase}'=Ready --timeout=20m"
             description: "Wait for ceph cluster to be ready"
