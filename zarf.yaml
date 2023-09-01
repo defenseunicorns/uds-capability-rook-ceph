@@ -2,7 +2,7 @@ kind: ZarfPackageConfig
 metadata:
   name: rook-ceph
   description: "UDS Package Rook Ceph"
-  version: "0.0.1"
+  version: "0.0.0"
   architecture: amd64
 
 variables:

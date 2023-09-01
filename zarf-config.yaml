@@ -4,4 +4,5 @@ package:
   deploy:
     set:
       # -- Regular expression matching all devices to use for Ceph storage, example "^sd."
+      # If not provided all unformatted devices and partitions will be formatted for Ceph.
       device_filter: ""

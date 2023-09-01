@@ -1,0 +1,18 @@
+######################
+# Make Targets
+######################
+.PHONY: help
+help: ## Show this help message.
+	@grep -E '^[a-zA-Z_/-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| sort \
+		| awk 'BEGIN {FS = ":.*?## "; printf "\nUsage:\n"}; {printf "  %-15s %s\n", $$1, $$2}'
+	@echo
+
+.PHONY: create-zarf-package
+create-zarf-package: ## Build the zarf package.
+	zarf package create $(extra_create_args) --confirm
+
+.PHONY: publish-zarf-package
+publish-zarf-package: ## Publish the zarf package and skeleton.
+	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
+	zarf package publish . oci://ghcr.io/defenseunicorns/packages
