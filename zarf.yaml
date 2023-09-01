@@ -16,10 +16,11 @@ components:
   - name: rook-ceph-operator
     required: true
     charts:
+      # renovate: datasource=helm
       - name: rook-ceph
+        url: https://charts.rook.io/release
         version: v1.12.2
         namespace: rook-ceph
-        url: https://charts.rook.io/release
         valuesFiles:
           - values/operator-values.yaml
     images:
