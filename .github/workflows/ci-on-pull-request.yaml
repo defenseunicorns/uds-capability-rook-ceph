@@ -58,5 +58,10 @@ jobs:
       - name: Create Cluster
         run: make create-cluster
 
-      - name: Destroy Cluster
-        run: make destroy-cluster
+      - name: Stop Cluster
+        if: always()
+        run: make stop-cluster
+
+      - name: Delete Cluster
+        if: always()
+        run: make delete-cluster
