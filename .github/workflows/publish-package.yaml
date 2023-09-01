@@ -20,14 +20,14 @@ jobs:
           registry: registry1.dso.mil
           username: ${{ secrets.REGISTRY1_USERNAME }}
           password: ${{ secrets.REGISTRY1_PASSWORD }}
-  
+
       - name: Install Zarf
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
           version: v0.29.1
           download-init-package: true
-  
+
       - name: Create Package
         run: make create-zarf-package
 
