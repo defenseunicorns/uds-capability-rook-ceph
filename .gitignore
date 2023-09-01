@@ -1,1 +1,2 @@
-zarf-package-*
+**/*.zst
+**/zarf-sbom

@@ -13,12 +13,8 @@ cephClusterSpec:
   # Use select devices for storage
   storage:
     useAllNodes: true
-    # Configure device filter
     useAllDevices: true
-    config:
-      deviceFilter: "###ZARF_VAR_DEVICE_FILTER###"
-      # Separate metadata device to smaller + faster device
-      # metadataDevice: "sdb"
+    deviceFilter: "###ZARF_VAR_DEVICE_FILTER###"
 
 imagePullSecrets:
   - name: private-registry
