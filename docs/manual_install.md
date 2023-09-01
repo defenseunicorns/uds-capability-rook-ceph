@@ -30,7 +30,7 @@
    # Wait for cluster to be ready
    kubectl wait --for=condition=ready cephcluster -n rook-ceph rook-ceph --timeout=20m
    ```
-During this install, you will see various jobs/pods being created (took ~17 minutes):
+   During this install, you will see various jobs/pods being created (took ~17 minutes):
    ```
     rook-ceph-csi-detect
     rook-ceph-detect-version
