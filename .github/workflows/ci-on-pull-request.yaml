@@ -56,4 +56,7 @@ jobs:
           sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
       - name: Create Cluster
-        run: make create-test-cluster
+        run: make create-cluster
+      
+      - name: Destroy Cluster
+        run: make destroy-cluster
