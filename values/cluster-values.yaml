@@ -1,0 +1,20 @@
+cephClusterSpec:
+  cephVersion:
+    image: registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6 # v18 IB image not fully functional, upstream chart has v17 by default
+
+  network:
+    # Use host networking to avoid CNI causing storage issues
+    provider: host
+    # Encrypt connections to/from storage
+    connections:
+      encryption:
+        enabled: true
+
+  # Use select devices for storage
+  storage:
+    useAllNodes: true
+    useAllDevices: true
+    deviceFilter: "###ZARF_VAR_DEVICE_FILTER###"
+
+imagePullSecrets:
+  - name: private-registry
