@@ -88,9 +88,8 @@
       "fileMatch": [ 
         "^zarf\\.yaml$"
       ],
-      "matchStrings": ["registry1.dso.mil/ironbank/(?<depName>.*)/(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+      "matchStrings": ["- (?<depName>.*):(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
       "datasourceTemplate": "docker",
-      "registryUrlTemplate": "registry1.dso.mil/ironbank",
       "versioningTemplate": "semver"
     }
   ],
