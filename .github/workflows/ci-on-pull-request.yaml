@@ -55,24 +55,11 @@ jobs:
           curl -LO https://github.com/kubernetes/minikube/releases/download/v1.31.2/minikube-linux-amd64
           sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-      - name: Make Partition
-        run: |
-          sudo lsblk -f
-
-          (
-          echo o # Create a new empty DOS partition table
-          echo n # Add a new partition
-          echo p # Primary partition
-          echo 7 # Partition number
-          echo   # First sector (Accept default: 1)
-          echo   # Last sector (Accept default: varies)
-          echo w # Write changes
-          ) | sudo fdisk /dev/sda
-
-          sudo lsblk -f
-
       - name: Create Cluster
         run: make create-cluster
+
+      - name: Deploy Package
+        run: make deploy-zarf-package
 
       - name: Stop Cluster
         if: always()

@@ -12,6 +12,10 @@ help: ## Show this help message.
 create-zarf-package: ## Build the zarf package.
 	zarf package create $(extra_create_args) --confirm
 
+.PHONY: deploy-zarf-package
+deploy-zarf-package: ## Deploy the zarf package.
+	zarf package deploy zarf-package-*.tar.zst --confirm
+
 .PHONY: publish-zarf-package
 publish-zarf-package: ## Publish the zarf package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
