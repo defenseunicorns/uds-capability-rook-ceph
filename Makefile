@@ -27,7 +27,15 @@ zarf-init: ## Zarf init.
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with minkube
-	minikube start --disk-size=20g --driver docker
+	minikube start --disk-size=10g --nodes 3 --driver docker
+
+.PHONY: debug-output
+debug-output: ## Debug Output for help in CI
+	kubectl get pod -A
+	kubectl get cephcluster -A
+	kubectl get cephblockpool -A
+	kubectl get cephfilesystem -A
+	kubectl get cephobjectstore -A
 
 .PHONY: stop-cluster
 stop-cluster: ## Stop the test cluster

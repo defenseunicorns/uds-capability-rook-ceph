@@ -64,6 +64,10 @@ jobs:
       - name: Deploy Package
         run: make deploy-zarf-package
 
+      - name: Debug Output
+        if: always()
+        run: make debug-output
+
       - name: Stop Cluster
         if: always()
         run: make stop-cluster
