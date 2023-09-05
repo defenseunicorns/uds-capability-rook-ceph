@@ -23,11 +23,14 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 
 .PHONY: zarf-init
 zarf-init: ## Zarf init.
-	zarf init --confirm
+	zarf init --storage-class=csi-hostpath-sc --confirm
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with minkube
 	minikube start --disk-size=20g --nodes 3 --driver docker
+	minikube addons enable volumesnapshots
+	minikube addons enable csi-hostpath-driver
+	kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 .PHONY: debug-output
 debug-output: ## Debug Output for help in CI
