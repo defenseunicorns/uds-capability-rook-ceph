@@ -27,7 +27,7 @@ zarf-init: ## Zarf init.
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with minkube
-	minikube start --disk-size=10g --nodes 3 --driver docker
+	minikube start --disk-size=20g --nodes 3 --driver docker
 
 .PHONY: debug-output
 debug-output: ## Debug Output for help in CI
