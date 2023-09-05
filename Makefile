@@ -1,3 +1,5 @@
+.ONESHELL: # Single shell per target
+
 ######################
 # Make Targets
 ######################
