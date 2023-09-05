@@ -56,7 +56,9 @@ jobs:
           sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
       - name: Create Cluster
-        run: make create-cluster
+        env:
+          SHA: ${{ github.sha }}
+        run: make create-cluster short_sha="${SHA:0:7}"
 
       - name: Zarf Init
         run: make zarf-init
@@ -67,10 +69,6 @@ jobs:
       - name: Debug Output
         if: always()
         run: make debug-output
-
-      - name: Stop Cluster
-        if: always()
-        run: make stop-cluster
 
       - name: Delete Cluster
         if: always()

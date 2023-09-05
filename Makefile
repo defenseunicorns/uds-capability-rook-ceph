@@ -14,7 +14,7 @@ create-zarf-package: ## Build the zarf package.
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf package deploy zarf-package-*.tar.zst --confirm
+	zarf package deploy zarf-package-*.tar.zst --set device_filter="nvme1n1" --confirm
 
 .PHONY: publish-zarf-package
 publish-zarf-package: ## Publish the zarf package and skeleton.
@@ -25,12 +25,17 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 zarf-init: ## Zarf init.
 	zarf init --storage-class=csi-hostpath-sc --confirm
 
-.PHONY: create-cluster
-create-cluster: ## Create a test cluster with minkube
-	minikube start --disk-size=20g --nodes 3 --driver docker
-	minikube addons enable volumesnapshots
-	minikube addons enable csi-hostpath-driver
-	kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+.PHONY: create-cluster # TODO: Make this work for local/dev AWS account
+create-cluster: ## Create a test cluster with terraform
+	cd .github/test-infra/rke2
+	terraform init -force-copy \
+		-backend-config="bucket=uds-ci-state-bucket" \
+		-backend-config="key=tfstate/ci/install/uds-rook-$(short_sha)-rke2.tfstate" \
+		-backend-config="region=us-west-2" \
+		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
+	terraform apply -auto-approve
+	kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.21"
+	kubectl apply -f storage-class.yaml
 
 .PHONY: debug-output
 debug-output: ## Debug Output for help in CI
@@ -40,10 +45,7 @@ debug-output: ## Debug Output for help in CI
 	kubectl get cephfilesystem -A
 	kubectl get cephobjectstore -A
 
-.PHONY: stop-cluster
-stop-cluster: ## Stop the test cluster
-	minikube stop
-
 .PHONY: delete-cluster
-delete-cluster: ## Delete the test cluster
-	minikube delete
+delete-cluster: ## Delete the test cluster with terraform
+	cd .github/test-infra/rke2
+	terraform destroy -auto-approve
