@@ -58,6 +58,9 @@ jobs:
       - name: Create Cluster
         run: make create-cluster
 
+      - name: Zarf Init
+        run: make zarf-init
+
       - name: Deploy Package
         run: make deploy-zarf-package
 

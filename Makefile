@@ -14,13 +14,16 @@ create-zarf-package: ## Build the zarf package.
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf init --confirm
 	zarf package deploy zarf-package-*.tar.zst --confirm
 
 .PHONY: publish-zarf-package
 publish-zarf-package: ## Publish the zarf package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
 	zarf package publish . oci://ghcr.io/defenseunicorns/packages
+
+.PHONY: zarf-init
+zarf-init: ## Zarf init.
+	zarf init --confirm
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with minkube
