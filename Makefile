@@ -16,7 +16,7 @@ create-zarf-package: ## Build the zarf package.
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf package deploy zarf-package-*.tar.zst --set device_filter="nvme1n1" --confirm
+	zarf package deploy zarf-package-*.tar.zst --confirm
 
 .PHONY: publish-zarf-package
 publish-zarf-package: ## Publish the zarf package and skeleton.

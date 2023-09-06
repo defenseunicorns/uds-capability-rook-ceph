@@ -1,6 +1,6 @@
 image:
   repository: registry1.dso.mil/ironbank/rook/ceph
-  tag: v1.12.2
+  tag: v1.12.3
 
 csi:
   cephFSKernelMountOptions: "ms_mode=secure"
@@ -9,7 +9,8 @@ csi:
     enabled: true
 
   cephcsi:
-    image: registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
+    # image: registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0 # - https://repo1.dso.mil/dsop/opensource/ceph/ceph-csi/-/issues/50
+    image: quay.io/cephcsi/cephcsi:v3.9.0
 
   registrar:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.8.0
