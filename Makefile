@@ -48,7 +48,7 @@ create-cluster: ## Create a test cluster with terraform
 	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 .PHONY: create-dev-cluster
-create-cluster: ## Create a test cluster with terraform using dev-rke2.tfvars
+create-dev-cluster: ## Create a test cluster with terraform using dev-rke2.tfvars
 	cd .github/test-infra/rke2
 	terraform init -force-copy \
 		-backend-config="bucket=uds-ci-state-bucket" \
@@ -73,7 +73,7 @@ delete-cluster: ## Delete the test cluster with terraform
 	terraform destroy -auto-approve
 
 .PHONY: delete-dev-cluster
-delete-cluster: ## Delete the test cluster with terraform using dev-rke2.tfvars
+delete-dev-cluster: ## Delete the test cluster with terraform using dev-rke2.tfvars
 	cd .github/test-infra/rke2
 	terraform destroy -auto-approve -var-file=dev-rke2.tfvars
 
