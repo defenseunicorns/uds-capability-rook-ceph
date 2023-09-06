@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to Registry1
         uses: docker/login-action@v2
@@ -30,6 +30,24 @@ jobs:
 
       - name: Create Package
         run: make create-zarf-package
+
+      - name: Create Cluster
+        env:
+          SHA: ${{ github.sha }}
+        run: make create-cluster short_sha="${SHA:0:7}"
+
+      - name: Zarf Init
+        run: make zarf-init
+
+      - name: Deploy Package
+        run: make deploy-zarf-package
+
+      - name: Test Package
+        run: make test-zarf-package
+
+      - name: Delete Cluster
+        if: always()
+        run: make delete-cluster
 
       - name: Login to GHCR
         uses: docker/login-action@v2
