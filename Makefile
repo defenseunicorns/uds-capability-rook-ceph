@@ -36,8 +36,8 @@ create-cluster: ## Create a test cluster with terraform
 		-backend-config="region=us-west-2" \
 		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
 	terraform apply -auto-approve
-	kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.21"
-	kubectl apply -f storage-class.yaml
+	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
+	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 .PHONY: debug-output
 debug-output: ## Debug Output for help in CI
