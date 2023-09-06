@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+  labels:
+    zarf.dev/agent: ignore
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+  namespace: test
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  namespace: test
+spec:
+  volumes:
+    - name: test-pvc
+      persistentVolumeClaim:
+        claimName: test-pvc
+  containers:
+    - name: test-container
+      image: ghcr.io/stefanprodan/podinfo:6.4.1
+      command:
+        - ./podinfo
+      volumeMounts:
+        - mountPath: "/data"
+          name: test-pvc

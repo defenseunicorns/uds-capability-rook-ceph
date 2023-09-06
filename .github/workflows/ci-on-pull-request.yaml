@@ -78,6 +78,9 @@ jobs:
       - name: Deploy Package
         run: make deploy-zarf-package
 
+      - name: Test Package
+        run: make test-zarf-package
+
       - name: Debug Output
         if: always()
         run: make debug-output

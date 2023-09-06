@@ -23,11 +23,19 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
 	zarf package publish . oci://ghcr.io/defenseunicorns/packages
 
+.PHONY: test-zarf-package
+test-zarf-package: ## Run a smoke test to validate PVCs work
+	cd .github/test-infra/storage
+	kubectl apply test-manifests.yaml
+	kubectl wait --for=jsonpath='{.status.phase}'=Bound -n test pvc/test-pvc
+	kubectl wait --for=condition=Ready -n test pod/test-pod --timeout=1m
+
 .PHONY: zarf-init
 zarf-init: ## Zarf init.
+	zarf tools download-init
 	zarf init --confirm
 
-.PHONY: create-cluster # TODO: Make this work for local/dev AWS account
+.PHONY: create-cluster
 create-cluster: ## Create a test cluster with terraform
 	cd .github/test-infra/rke2
 	terraform init -force-copy \
@@ -36,6 +44,18 @@ create-cluster: ## Create a test cluster with terraform
 		-backend-config="region=us-west-2" \
 		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
 	terraform apply -auto-approve
+	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
+	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
+.PHONY: create-dev-cluster
+create-cluster: ## Create a test cluster with terraform using dev-rke2.tfvars
+	cd .github/test-infra/rke2
+	terraform init -force-copy \
+		-backend-config="bucket=uds-ci-state-bucket" \
+		-backend-config="key=tfstate/ci/install/uds-rook-$$(openssl rand -hex 3)-rke2.tfstate" \
+		-backend-config="region=us-west-2" \
+		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
+	terraform apply -auto-approve -var-file=dev-rke2.tfvars
 	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
 	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
@@ -51,3 +71,11 @@ debug-output: ## Debug Output for help in CI
 delete-cluster: ## Delete the test cluster with terraform
 	cd .github/test-infra/rke2
 	terraform destroy -auto-approve
+
+.PHONY: delete-dev-cluster
+delete-cluster: ## Delete the test cluster with terraform using dev-rke2.tfvars
+	cd .github/test-infra/rke2
+	terraform destroy -auto-approve -var-file=dev-rke2.tfvars
+
+.PHONY: test-dev-e2e
+test-dev-e2e: create-dev-cluster zarf-init create-zarf-package extra_create_args="--skip-sbom" deploy-zarf-package test-zarf-package delete-dev-cluster## Run an e2e test for dev
