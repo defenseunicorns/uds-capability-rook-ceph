@@ -11,7 +11,12 @@ If you are set on local development you can follow [this guide](https://rook.io/
 
 Due to the small size of github runners and challenges with nested virtualization, the CI workflows use a 3 node RKE2 cluster running on AWS that is initialized with terraform. You can borrow the example terraform from `.github/test-infra/rke2` to test in a similar way for your own development. An example `dev-rke2.tfvars` file is included in this folder with some of the common overrides that are required.
 
-Ensure that you have logged in to `registry1.dso.mil` and you are in a shell with access to your target AWS environment. Then using the make targets you can run the same commands as CI:
+Prerequisites:
+- `docker login` to `registry1.dso.mil`
+- active shell has access to your target AWS environment
+- `make` 3.82 or higher installed (check with `make --version`)
+
+Using the make targets you can run the same commands as CI:
 ```
 make create-dev-cluster # Note that this will overwrite your default kubeconfig
 make zarf-init

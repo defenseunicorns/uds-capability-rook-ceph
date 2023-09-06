@@ -51,10 +51,10 @@ create-cluster: ## Create a test cluster with terraform
 create-dev-cluster: ## Create a test cluster with terraform using dev-rke2.tfvars
 	cd .github/test-infra/rke2
 	terraform init -force-copy \
-		-backend-config="bucket=uds-ci-state-bucket" \
-		-backend-config="key=tfstate/ci/install/uds-rook-$$(openssl rand -hex 3)-rke2.tfstate" \
+		-backend-config="bucket=uds-dev-state-bucket" \
+		-backend-config="key=tfstate/uds-rook-$$(openssl rand -hex 3)-rke2.tfstate" \
 		-backend-config="region=us-west-2" \
-		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
+		-backend-config="dynamodb_table=uds-dev-state-dynamodb"
 	terraform apply -auto-approve -var-file=dev-rke2.tfvars
 	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
 	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
