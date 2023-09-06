@@ -25,7 +25,7 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 
 .PHONY: zarf-init
 zarf-init: ## Zarf init.
-	zarf init --storage-class=csi-hostpath-sc --confirm
+	zarf init --confirm
 
 .PHONY: create-cluster # TODO: Make this work for local/dev AWS account
 create-cluster: ## Create a test cluster with terraform
