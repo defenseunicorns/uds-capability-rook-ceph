@@ -29,12 +29,6 @@ module "rke2" {
       size        = 100
       encrypted   = true
       type        = "gp3"
-    },
-    {
-      device_name = "/dev/sdc"
-      size        = 100
-      encrypted   = true
-      type        = "gp3"
     }
   ]
   enable_ccm                  = true
@@ -71,12 +65,6 @@ module "agents" {
   extra_block_device_mappings = [
     {
       device_name = "/dev/sdb"
-      size        = 100
-      encrypted   = true
-      type        = "gp3"
-    },
-    {
-      device_name = "/dev/sdc"
       size        = 100
       encrypted   = true
       type        = "gp3"

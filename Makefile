@@ -26,14 +26,14 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 .PHONY: test-zarf-package
 test-zarf-package: ## Run a smoke test to validate PVCs work
 	cd .github/test-infra/storage
-	kubectl apply test-manifests.yaml
+	kubectl apply -f test-manifests.yaml
 	kubectl wait --for=jsonpath='{.status.phase}'=Bound -n test pvc/test-pvc
 	kubectl wait --for=condition=Ready -n test pod/test-pod --timeout=1m
 
 .PHONY: zarf-init
 zarf-init: ## Zarf init.
-	zarf tools download-init
-	zarf init --confirm
+	zarf tools download-init -a amd64
+	zarf init --confirm -a amd64
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with terraform

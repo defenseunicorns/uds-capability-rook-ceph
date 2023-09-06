@@ -45,6 +45,10 @@ jobs:
       - name: Test Package
         run: make test-zarf-package
 
+      - name: Debug Output
+        if: always()
+        run: make debug-output
+
       - name: Delete Cluster
         if: always()
         run: make delete-cluster
