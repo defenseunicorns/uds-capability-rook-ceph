@@ -28,4 +28,6 @@ make test-zarf-package
 make delete-dev-cluster
 ```
 
-Alternatively you can run the single `make test-dev-e2e` target to run through the full test process.
+Alternatively you can run more concise make targets for your testing needs:
+- `make dev-deploy`: Creates the cluster, initializes with zarf, creates the package, then deploys the package. Ensure you run `make delete-dev-cluster` to teardown once testing is complete.
+- `make test-dev-e2e`: Full e2e CI workflow to create, test and destroy.

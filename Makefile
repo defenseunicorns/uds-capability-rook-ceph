@@ -77,5 +77,8 @@ delete-dev-cluster: ## Delete the test cluster with terraform using dev-rke2.tfv
 	cd .github/test-infra/rke2
 	terraform destroy -auto-approve -var-file=dev-rke2.tfvars
 
+.PHONY: dev-deploy
+dev-deploy: create-dev-cluster zarf-init create-zarf-package deploy-zarf-package ## Create cluster and deploy package for dev
+
 .PHONY: test-dev-e2e
-test-dev-e2e: create-dev-cluster zarf-init create-zarf-package extra_create_args="--skip-sbom" deploy-zarf-package test-zarf-package delete-dev-cluster## Run an e2e test for dev
+test-dev-e2e: create-dev-cluster zarf-init create-zarf-package deploy-zarf-package test-zarf-package delete-dev-cluster ## Run an e2e test for dev
