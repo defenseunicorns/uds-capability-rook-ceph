@@ -50,26 +50,28 @@ jobs:
 
       - name: Create Package
         # Skip SBOM since package is used for internal testing, not publishing
-        run: make create-zarf-package extra_create_args="--skip-sbom"
+        run: ./scripts/helper.sh create-zarf-package --zarf-create-args "--skip-sbom"
 
       - name: Create Cluster
-        env:
-          SHA: ${{ github.sha }}
-        run: make create-cluster short_sha="${SHA:0:7}"
+        run: ./scripts/helper.sh create-cloud-cluster
 
       - name: Zarf Init
-        run: make zarf-init
+        run: ./scripts/helper.sh zarf-init
 
       - name: Deploy Package
-        run: make deploy-zarf-package
+        run: ./scripts/helper.sh deploy-zarf-package
 
       - name: Test Package
-        run: make test-zarf-package
+        run: ./scripts/helper.sh test-zarf-package
 
       - name: Debug Output
         if: always()
-        run: make debug-output
+        run: ./scripts/helper.sh debug-output
+
+      - name: Remove Package
+        if: always()
+        run: ./scripts/helper.sh remove-zarf-package
 
       - name: Delete Cluster
         if: always()
-        run: make delete-cluster
+        run: ./scripts/helper.sh delete-cloud-cluster
