@@ -23,6 +23,12 @@ publish-zarf-package: ## Publish the zarf package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
 	zarf package publish . oci://ghcr.io/defenseunicorns/packages
 
+.PHONY: remove-zarf-package
+remove-zarf-package: ## Remove the zarf package.
+	kubectl delete pod -n test test-pod --ignore-not-found
+	kubectl delete pvc -n test test-pvc --ignore-not-found
+	zarf package remove zarf-package-*.tar.zst --confirm
+
 .PHONY: test-zarf-package
 test-zarf-package: ## Run a smoke test to validate PVCs work
 	cd .github/test-infra/storage
