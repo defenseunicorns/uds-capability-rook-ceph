@@ -14,6 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
+          role-session-name: ${{ github.job || github.event.client_payload.pull_request.head.sha || github.sha }}
+          aws-region: us-west-2
+          role-duration-seconds: 21600
+
       - name: Login to Registry1
         uses: docker/login-action@v2
         with:
@@ -48,6 +56,10 @@ jobs:
       - name: Debug Output
         if: always()
         run: make debug-output
+
+      - name: Remove Package
+        if: always()
+        run: make remove-zarf-package
 
       - name: Delete Cluster
         if: always()

@@ -43,3 +43,14 @@ zarf package deploy zarf-package-rook-ceph-amd64-*.tar.zst --confirm
 ## Storage Provisioning
 
 The default storage class will be configured to be `ceph-block`, which provides a standard RWO experience for most applications and PVC needs. To use the RWX capability you can create a PVC with the `ceph-filesystem` storage class. For an S3 compatible bucket you can create a custom resource, `ObjectBucketClaim`, such as the example [here](./examples/bucket.yaml).
+
+## Remove
+
+Removing the Rook-Ceph package is intentionally not "automatic" to prevent unintentional data loss. In order for the package to remove successfully there must be no storage pieces utilizing the Ceph storage (i.e. no PVCs, no buckets) existing in the cluster.
+
+Even after removing the zarf package the default behavior of Rook-Ceph will ensure that no data is lost unintentional. The full cleanup process but can be achieved by following the process in [the Rook docs](https://rook.io/docs/rook/v1.11/Getting-Started/ceph-teardown/). There are pieces you may need to complete prior to removing the zarf package - the below is an example of how to go through the deletion process to fully wipe data:
+
+1. Patch the cephcluster to ensure data is removed: `kubectl -n rook-ceph patch cephcluster rook-ceph --type merge -p '{"spec":{"cleanupPolicy":{"confirmation":"yes-really-destroy-data"}}}'`
+1. Cleanup PVCs/buckets, etc - specific to your environment/usage
+1. Remove the zarf package: `zarf package remove zarf-package-rook-ceph-amd64-*.tar.zst --confirm`
+1. Delete the data on hosts and zap disks following the [upstream guide](https://rook.io/docs/rook/v1.11/Getting-Started/ceph-teardown/#delete-the-data-on-hosts)

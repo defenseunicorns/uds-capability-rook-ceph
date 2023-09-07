@@ -70,6 +70,10 @@ jobs:
         if: always()
         run: make debug-output
 
+      - name: Remove Package
+        if: always()
+        run: make remove-zarf-package
+
       - name: Delete Cluster
         if: always()
         run: make delete-cluster
