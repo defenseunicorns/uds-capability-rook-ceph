@@ -2,8 +2,11 @@ kind: ZarfPackageConfig
 metadata:
   name: rook-ceph
   description: "UDS Package Rook Ceph"
-  version: "0.0.1"
+  # x-release-please-start-version
+  version: "0.0.0"
+  # x-release-please-end
   architecture: amd64
+  authors: "@mjnagel @andrewg-xyz"
 
 variables:
   - name: DEVICE_FILTER
@@ -15,14 +18,15 @@ components:
   - name: rook-ceph-operator
     required: true
     charts:
+      # renovate: datasource=helm
       - name: rook-ceph
-        version: v1.12.2
-        namespace: rook-ceph
         url: https://charts.rook.io/release
+        version: v1.12.3
+        namespace: rook-ceph
         valuesFiles:
           - values/operator-values.yaml
     images:
-      - registry1.dso.mil/ironbank/rook/ceph:v1.12.2
+      - registry1.dso.mil/ironbank/rook/ceph:v1.12.3
   - name: rook-ceph-cluster
     required: true
     actions:
@@ -40,17 +44,24 @@ components:
           - cmd: "./zarf tools wait-for cephobjectstore -n rook-ceph ceph-objectstore '{.status.phase}'=Ready --timeout=10m"
             description: "Waiting for ceph objectstore to be ready"
             mute: true
+          - cmd: "./zarf tools wait-for deployment -n rook-ceph csi-rbdplugin-provisioner available"
+            description: "Waiting for CSI RDB provisioner to be ready"
+            mute: true
+          - cmd: "./zarf tools wait-for deployment -n rook-ceph csi-cephfsplugin-provisioner available"
+            description: "Waiting for CSI CephFS provisioner to be ready"
+            mute: true
     charts:
       - name: rook-ceph-cluster
-        version: v1.12.2
+        version: v1.12.3
         namespace: rook-ceph
         url: https://charts.rook.io/release
         valuesFiles:
           - values/cluster-values.yaml
     images:
-      - registry1.dso.mil/ironbank/rook/ceph:v1.12.2
+      - registry1.dso.mil/ironbank/rook/ceph:v1.12.3
       - registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6
-      - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
+      - quay.io/cephcsi/cephcsi:v3.9.0
+      # - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.8.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.4.1
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.2.1

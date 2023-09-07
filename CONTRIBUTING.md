@@ -16,6 +16,8 @@ Specifically:
 * Continuous integration (CI) pipeline tests are definitive
 * We create immutable release artifacts
 
+Review the [developer guide](./docs/developer-guide.md) for details on how to test to mimic the CI process.
+
 ## Definition of Done
 
 We apply these general principles to all User Stories and activities contributing to this repo.
