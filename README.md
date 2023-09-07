@@ -46,7 +46,7 @@ The default storage class will be configured to be `ceph-block`, which provides 
 
 ## Remove
 
-Removing the Rook-Ceph package is intentionally not "automatic". In order for the package to remove successfully there must be no storage pieces utilizing the Ceph storage (i.e. no PVCs, no buckets) existing in the cluster.
+Removing the Rook-Ceph package is intentionally not "automatic" to prevent unintentional data loss. In order for the package to remove successfully there must be no storage pieces utilizing the Ceph storage (i.e. no PVCs, no buckets) existing in the cluster.
 
 Even after removing the zarf package the default behavior of Rook-Ceph will ensure that no data is lost unintentional. The full cleanup process but can be achieved by following the process in [the Rook docs](https://rook.io/docs/rook/v1.11/Getting-Started/ceph-teardown/). There are pieces you may need to complete prior to removing the zarf package - the below is an example of how to go through the deletion process to fully wipe data:
 
