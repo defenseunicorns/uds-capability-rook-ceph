@@ -13,7 +13,7 @@ csi:
     image: quay.io/cephcsi/cephcsi:v3.9.0
 
   registrar:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.8.0
+    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.0
 
   provisioner:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.4.1
