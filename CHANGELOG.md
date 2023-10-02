@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/defenseunicorns/uds-package-rook-ceph/compare/v0.0.2...v0.0.3) (2023-09-26)
+
+
+### Features
+
+* IB ceph-csi image ([#27](https://github.com/defenseunicorns/uds-package-rook-ceph/issues/27)) ([228c6a8](https://github.com/defenseunicorns/uds-package-rook-ceph/commit/228c6a81b5c91d7145f6fd6db457312913f5a007))
+
 ## [0.0.2](https://github.com/defenseunicorns/uds-package-rook-ceph/compare/v0.0.1...v0.0.2) (2023-09-25)
 
 
