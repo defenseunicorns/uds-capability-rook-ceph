@@ -21,7 +21,7 @@ components:
       # renovate: datasource=helm
       - name: rook-ceph
         url: https://charts.rook.io/release
-        version: v1.12.4
+        version: v1.12.5
         namespace: rook-ceph
         valuesFiles:
           - values/operator-values.yaml
@@ -51,8 +51,9 @@ components:
             description: "Waiting for CSI CephFS provisioner to be ready"
             mute: true
     charts:
+      # renovate: datasource=helm
       - name: rook-ceph-cluster
-        version: v1.12.3
+        version: v1.12.5
         namespace: rook-ceph
         url: https://charts.rook.io/release
         valuesFiles:
