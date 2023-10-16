@@ -24,7 +24,7 @@ csi:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.2.0
 
   resizer:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.5.0
+    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.0
 
 imagePullSecrets:
   - name: private-registry
