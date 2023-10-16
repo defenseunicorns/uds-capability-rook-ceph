@@ -5,10 +5,7 @@
   "extends": [
     "config:base"
   ],
-  "timezone": "America/New_York",
-  "repositories": ["defenseunicorns/uds-package-dubbd"],
   "rebaseStalePrs": true,
-  "schedule": ["after 12pm and before 11am every weekday"],
   "dependencyDashboard": true,
   "platform": "github",
   "onboarding": false,
@@ -16,18 +13,12 @@
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "rebaseWhen": "conflicted",
   "commitBodyTable": true,
-  "ignorePaths": ["archive/**"],
   "suppressNotifications": ["prIgnoreNotification"],
   "helm-values": {
     "fileMatch": ["./.+\\.yaml$"]
   },
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"],
-    "ignorePaths": [
-      "ansible",
-      "scripts",
-      ".github"
-    ]
+    "fileMatch": ["\\.yaml$"]
   },
   "hostRules": [
     {
