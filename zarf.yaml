@@ -66,4 +66,4 @@ components:
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.5.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.2.1
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.2.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.1
