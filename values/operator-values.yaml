@@ -15,16 +15,16 @@ csi:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.0
 
   provisioner:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.5.0
+    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.1
 
   snapshotter:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.2.1
+    image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 
   attacher:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.2.0
 
   resizer:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.0
+    image: registry.k8s.io/sig-storage/csi-resizer:v1.9.1
 
 imagePullSecrets:
   - name: private-registry
