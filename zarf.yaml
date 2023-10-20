@@ -63,7 +63,7 @@ components:
       - registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6
       - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.5.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.1
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.2.1
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.2.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.0
