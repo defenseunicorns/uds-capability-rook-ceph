@@ -1,6 +1,6 @@
 image:
   repository: registry1.dso.mil/ironbank/rook/ceph
-  tag: v1.12.5
+  tag: v1.12.6
 
 csi:
   cephFSKernelMountOptions: "ms_mode=secure"
