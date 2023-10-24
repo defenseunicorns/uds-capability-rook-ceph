@@ -1,6 +1,6 @@
 cephClusterSpec:
   cephVersion:
-    image: registry1.dso.mil/ironbank/opensource/ceph/ceph:v17.2.6 # v18 IB image not fully functional, upstream chart has v17 by default
+    image: registry1.dso.mil/ironbank/opensource/ceph/ceph:v18.2.0 # v18 IB image not fully functional, upstream chart has v17 by default
 
   network:
     # Use host networking to avoid CNI causing storage issues
