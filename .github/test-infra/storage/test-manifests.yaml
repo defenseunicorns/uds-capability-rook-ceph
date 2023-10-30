@@ -29,7 +29,7 @@ spec:
         claimName: test-pvc
   containers:
     - name: test-container
-      image: ghcr.io/stefanprodan/podinfo:6.5.2
+      image: ghcr.io/stefanprodan/podinfo:6.5.3
       command:
         - ./podinfo
       volumeMounts:
