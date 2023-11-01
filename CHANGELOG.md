@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.6](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.5...v0.0.6) (2023-11-01)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/zarf to v0.31.0 ([#55](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/55)) ([7421b89](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/7421b898b77df3990f00ab729f2a1c1a46e79360))
+* **deps:** update docker image ghcr.io/stefanprodan/podinfo to v6.5.3 ([#51](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/51)) ([59318cf](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/59318cf1904d6cbf542612d1559b4d92130298be))
+* **deps:** update docker image registry1.dso.mil/ironbank/rook/ceph to v1.12.7 ([#54](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/54)) ([b3698f4](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/b3698f419c860068a384e0a7b2b536b77de3e7f1))
+
 ## [0.0.5](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.4...v0.0.5) (2023-10-25)
 
 
