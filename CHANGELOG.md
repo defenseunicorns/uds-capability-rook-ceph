@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.7](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.6...v0.0.7) (2023-11-03)
+
+
+### Miscellaneous
+
+* release ([ca75d8c](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/ca75d8c1336fe0e33f8f004c80f0883a74a64b58))
+* release [skip ci] ([#57](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/57)) ([98a34cc](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/98a34cc8d64b06c9721d70afa6fe34c24af30391))
+
 ## [0.0.6](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.5...v0.0.6) (2023-11-01)
 
 
