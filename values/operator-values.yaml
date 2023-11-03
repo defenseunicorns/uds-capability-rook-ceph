@@ -29,5 +29,5 @@ csi:
 imagePullSecrets:
   - name: private-registry
 
-# -- Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions.
+# -- Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions
 hostpathRequiresPrivileged: ###ZARF_VAR_PRIVILEGED_HOSTPATH###
