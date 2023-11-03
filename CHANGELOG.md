@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.6...v0.0.7) (2023-11-03)
+
+
+### Miscellaneous
+
+* add configurability for single node ([#56](https://github.com/defenseunicorns/uds-capability-rook-ceph/pull/56))
+
 ## [0.0.6](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.5...v0.0.6) (2023-11-01)
 
 
