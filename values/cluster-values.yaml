@@ -1,6 +1,18 @@
+configOverride: |
+  [global]
+  osd_pool_default_size = ###ZARF_VAR_POOL_SIZE###
+  osd_pool_default_min_size = ###ZARF_VAR_MIN_POOL_SIZE###
+  mon_warn_on_pool_no_redundancy = ###ZARF_VAR_NO_REDUNDANCY_WARNING###
+  bluefs_buffered_io = ###ZARF_VAR_BLUEFS_BUFFERED_IO###
 cephClusterSpec:
   cephVersion:
     image: quay.io/ceph/ceph:v18.2.0
+  mon:
+    count: ###ZARF_VAR_MON_COUNT###
+    allowMultiplePerNode: ###ZARF_VAR_MON_ALLOW_MULTI_PER_NODE###
+  mgr:
+    count: ###ZARF_VAR_MGR_COUNT###
+    allowMultiplePerNode: ###ZARF_VAR_MGR_ALLOW_MULTI_PER_NODE###
 
   network:
     # Use host networking to avoid CNI causing storage issues
