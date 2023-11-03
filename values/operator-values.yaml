@@ -30,4 +30,4 @@ imagePullSecrets:
   - name: private-registry
 
 # -- Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions.
-hostpathRequiresPrivileged: ###ZARF_VAR_PRIVLEDGED_HOSTPATH###
+hostpathRequiresPrivileged: ###ZARF_VAR_PRIVLEGED_HOSTPATH###
