@@ -13,7 +13,7 @@ variables:
     description: "Regular expression matching all devices to use for Ceph storage, example '^sd.'"
     default: ""
     prompt: false
-  - name: PRIVLEGED_HOSTPATH
+  - name: PRIVILEGED_HOSTPATH
     description: "Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions."
     default: "false"
     prompt: false
