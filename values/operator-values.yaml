@@ -15,7 +15,7 @@ csi:
     image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.0
 
   provisioner:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.1
+    image: registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.2
 
   snapshotter:
     image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.1
