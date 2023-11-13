@@ -107,7 +107,7 @@ components:
                 condition: available
                 namespace: rook-ceph
             maxTotalSeconds: 600
-            description: Waiting for CSI RDB provisioner to be ready
+            description: Waiting for CSI RDB provisioner to be available
           - wait:
               cluster:
                 kind: deployment
@@ -115,7 +115,7 @@ components:
                 condition: available
                 namespace: rook-ceph
             maxTotalSeconds: 600
-            description: Waiting for CSI CephFS provisioner to be ready
+            description: Waiting for CSI CephFS provisioner to be available
     charts:
       # renovate: datasource=helm
       - name: rook-ceph-cluster
