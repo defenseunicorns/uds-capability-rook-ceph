@@ -14,7 +14,7 @@ variables:
     default: ""
     prompt: false
   - name: PRIVILEGED_HOSTPATH
-    description: "Runs Ceph Pods as privileged to be able to write to `hostPaths` in environments with SELinux restrictions."
+    description: "Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions."
     default: "false"
     prompt: false
   - name: POOL_SIZE
@@ -34,19 +34,19 @@ variables:
     default: "true"
     prompt: false
   - name: MON_COUNT
-    description: "Set to false if running on single node"
+    description: "Set to 1 if running on single node"
     default: "3"
     prompt: false
   - name: MON_ALLOW_MULTI_PER_NODE
-    description: "Set to false if running on single node"
+    description: "Set to true if running on single node"
     default: "false"
     prompt: false
   - name: MGR_COUNT
-    description: "Set to false if running on single node"
+    description: "Set to 1 if running on single node"
     default: "2"
     prompt: false
   - name: MGR_ALLOW_MULTI_PER_NODE
-    description: "Set to false if running on single node"
+    description: "Set to true if running on single node"
     default: "false"
     prompt: false
 
