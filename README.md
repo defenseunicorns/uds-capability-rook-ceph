@@ -1,24 +1,18 @@
-# UDS Package Rook-Ceph
+# UDS Capability Rook-Ceph
 
-This package provides a deployment of [Rook](https://rook.io/) within a zarf package. Rook/Ceph is preconfigured in this package to provide:
+This package provides a custom zarf init package containing [Rook](https://rook.io/). Rook/Ceph is preconfigured in this package to provide:
 - Block storage for typical PVC usage (`ceph-block` storage class)
 - RWX storage (`ceph-filesystem` storage class)
 - S3-compatible object storage (`ceph-bucket` storage class) 
 
 ## Pre-requisites
-- Zarf is installed locally with a minimum version of [v0.29.1](https://github.com/defenseunicorns/zarf/releases/tag/v0.29.1)
-- A working Kubernetes cluster on v1.26+ and a working kube context pointing to the cluster (`kubectl get nodes` <-- this command works)
+- Zarf is installed locally with a minimum version of [v0.31.1](https://github.com/defenseunicorns/zarf/releases/tag/v0.31.1)
+- A working Kubernetes cluster on v1.26+ and a working kube context pointing to the cluster (or this package can be used to deploy a k3s cluster)
 - Cluster nodes meet the [requirements for Rook-Ceph](https://rook.github.io/docs/rook/v1.12/Getting-Started/Prerequisites/prerequisites/). In general you need empty unformatted drives or partitions for Rook to configure for storage.
-- Cluster has been zarf init-ed with a different storage class. An example using the [local-path-provisioner](https://github.com/rancher/local-path-provisioner) is provided below:
-    ```console
-    kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml # deploy the local path provisioner
-    kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' # set storage class as default
-    zarf init -a amd64 # no optional components are required by this package
-    ```
 
 ## Create
 
-To create the `rook-ceph` UDS package:
+To create the `rook-ceph` custom init package:
 ```console
 # Login to the registry
 set +o history
@@ -28,16 +22,25 @@ echo $REGISTRY1_PASSWORD | zarf tools registry login registry1.dso.mil --usernam
 set -o history
 
 # Create the zarf package
-zarf package create --architecture amd64 --confirm
+zarf package create --architecture amd64 --confirm --set AGENT_IMAGE_TAG=$(zarf version)
 ```
 
 ## Deploy
 
-This package has a single configuration option for `device_filter` in the `zarf-config.yaml`. This value can be set to a regex that matches the devices/drives that you want to use for ceph storage. For example, if you wanted to use all devices starting `sd` you could set to `^sd.`. You can also leave the value as an empty string to use all unformatted devices/partitions.
+This package has several configuration options. The most commonly set ones are:
+- `DEVICE_FILTER`: A regex to select specific devices (drives/partitions) for Ceph to use, defaults to all unformatted devices
+- `PRIVILEGED_HOSTPATH`: Runs Ceph Pods as privileged to be able to write to `hostPaths` in environments with SELinux restrictions (set to true/false)
 
-Then to deploy the package:
+These variables can be setup in your zarf config file under the `package.deploy.set` key, or passed in as `--set` values at deploy time.
+
+To deploy the package either follow the steps from above to build it, or pull it down locally:
 ```console
-zarf package deploy zarf-package-rook-ceph-amd64-*.tar.zst --confirm
+zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:v0.31.1 # Or latest version
+```
+
+Once you have the package locally, init like you would with the standard init package:
+```console
+zarf init --confirm # Optionally add --set values here
 ```
 
 ## Storage Provisioning
@@ -52,5 +55,7 @@ Even after removing the zarf package the default behavior of Rook-Ceph will ensu
 
 1. Patch the cephcluster to ensure data is removed: `kubectl -n rook-ceph patch cephcluster rook-ceph --type merge -p '{"spec":{"cleanupPolicy":{"confirmation":"yes-really-destroy-data"}}}'`
 1. Cleanup PVCs/buckets, etc - specific to your environment/usage
-1. Remove the zarf package: `zarf package remove zarf-package-rook-ceph-amd64-*.tar.zst --confirm`
+1. Remove the zarf init package: `zarf destroy --confirm`
+1. Cleanup rook/ceph cluster: `helm uninstall rook-ceph-cluster -n rook-ceph`
+1. Wait until resources have all been removed then remove the operator: `helm uninstall rook-ceph -n rook-ceph`
 1. Delete the data on hosts and zap disks following the [upstream guide](https://rook.io/docs/rook/v1.11/Getting-Started/ceph-teardown/#delete-the-data-on-hosts)

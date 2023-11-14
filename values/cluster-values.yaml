@@ -6,7 +6,8 @@ configOverride: |
   bluefs_buffered_io = ###ZARF_VAR_BLUEFS_BUFFERED_IO###
 cephClusterSpec:
   cephVersion:
-    image: quay.io/ceph/ceph:v18.2.0
+    # renovate: image=quay.io/ceph/ceph
+    image: ###ZARF_REGISTRY###/ceph/ceph:v18.2.0
   mon:
     count: ###ZARF_VAR_MON_COUNT###
     allowMultiplePerNode: ###ZARF_VAR_MON_ALLOW_MULTI_PER_NODE###

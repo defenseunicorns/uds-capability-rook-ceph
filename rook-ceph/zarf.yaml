@@ -1,0 +1,145 @@
+kind: ZarfPackageConfig
+metadata:
+  name: rook-ceph
+  description: "UDS Package Rook Ceph"
+  # x-release-please-start-version
+  version: "0.0.7"
+  # x-release-please-end
+  architecture: amd64
+  authors: "@mjnagel @andrewg-xyz"
+
+variables:
+  - name: DEVICE_FILTER
+    description: "Regular expression matching all devices to use for Ceph storage, example '^sd.'"
+    default: ""
+    prompt: false
+  - name: PRIVILEGED_HOSTPATH
+    description: "Runs Ceph Pods as privileged to be able to write to `hostPaths` in environments with SELinux restrictions."
+    default: "false"
+    prompt: false
+  - name: POOL_SIZE
+    description: "Sets OSD pool size"
+    default: "3"
+    prompt: false
+  - name: MIN_POOL_SIZE
+    description: "Sets minimum OSD pool size"
+    default: "2"
+    prompt: false
+  - name: NO_REDUNDANCY_WARNING
+    description: "When set to true, will warn if there is no redundancy"
+    default: "true"
+    prompt: false
+  - name: BLUEFS_BUFFERED_IO
+    description: "Set to false if running on single node"
+    default: "true"
+    prompt: false
+  - name: MON_COUNT
+    description: "Set to false if running on single node"
+    default: "3"
+    prompt: false
+  - name: MON_ALLOW_MULTI_PER_NODE
+    description: "Set to false if running on single node"
+    default: "false"
+    prompt: false
+  - name: MGR_COUNT
+    description: "Set to false if running on single node"
+    default: "2"
+    prompt: false
+  - name: MGR_ALLOW_MULTI_PER_NODE
+    description: "Set to false if running on single node"
+    default: "false"
+    prompt: false
+
+components:
+  - name: rook-ceph-images
+    required: true
+    description: Push rook ceph images to the zarf registry
+    images:
+      - registry1.dso.mil/ironbank/rook/ceph:v1.12.7
+      - quay.io/ceph/ceph:v18.2.0
+      - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.2
+      - registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.4.2
+      - registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+
+  - name: rook-ceph-operator
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: rook-ceph
+        url: https://charts.rook.io/release
+        version: v1.12.7
+        namespace: rook-ceph
+        valuesFiles:
+          - ../values/operator-values.yaml
+    # This action is a workaround to https://github.com/rook/rook/issues/12786
+    actions:
+      onDeploy:
+        after:
+          - cmd: |
+              ./zarf tools kubectl patch serviceaccount default -n rook-ceph -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
+            description: "Add pull secrets for rook/ceph cluster"
+
+  - name: rook-ceph-cluster
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: rook-ceph-cluster
+        version: v1.12.7
+        namespace: rook-ceph
+        url: https://charts.rook.io/release
+        valuesFiles:
+          - ../values/cluster-values.yaml
+    actions:
+      onDeploy:
+        after:
+          - wait:
+              cluster:
+                kind: cephcluster
+                name: rook-ceph
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph cluster to be ready
+          - wait:
+              cluster:
+                kind: cephblockpool
+                name: ceph-blockpool
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph blockpool to be ready
+          - wait:
+              cluster:
+                kind: cephfilesystem
+                name: ceph-filesystem
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph filesystem to be ready
+          - wait:
+              cluster:
+                kind: cephobjectstore
+                name: ceph-objectstore
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph objectstore to be ready
+          - wait:
+              cluster:
+                kind: deployment
+                name: csi-rbdplugin-provisioner
+                condition: available
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for CSI RDB provisioner to be available
+          - wait:
+              cluster:
+                kind: deployment
+                name: csi-cephfsplugin-provisioner
+                condition: available
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for CSI CephFS provisioner to be available

@@ -57,9 +57,6 @@ jobs:
           SHA: ${{ github.sha }}
         run: make create-cluster short_sha="${SHA:0:7}"
 
-      - name: Zarf Init
-        run: make zarf-init
-
       - name: Deploy Package
         run: make deploy-zarf-package
 

@@ -19,7 +19,6 @@ Prerequisites:
 Using the make targets you can run the same commands as CI:
 ```
 make create-dev-cluster # Note that this will overwrite your default kubeconfig
-make zarf-init
 make create-zarf-package extra_create_args="--skip-sbom"
 make deploy-zarf-package
 # At this point your cluster should be created with rook/ceph deployed on top

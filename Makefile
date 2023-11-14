@@ -16,18 +16,18 @@ create-zarf-package: ## Build the zarf package.
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf package deploy zarf-package-*.tar.zst --confirm
+	zarf init --confirm
 
-.PHONY: publish-zarf-package
-publish-zarf-package: ## Publish the zarf package and skeleton.
-	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
-	zarf package publish . oci://ghcr.io/defenseunicorns/packages
+.PHONY: publish-zarf-init-package
+publish-zarf-init-package: ## Publish the zarf init package and skeleton.
+	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
+	zarf package publish . oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
 
 .PHONY: remove-zarf-package
 remove-zarf-package: ## Remove the zarf package.
 	kubectl delete pod -n test test-pod --ignore-not-found
 	kubectl delete pvc -n test test-pvc --ignore-not-found
-	zarf package remove zarf-package-*.tar.zst --confirm
+	zarf destroy --confirm
 
 .PHONY: test-zarf-package
 test-zarf-package: ## Run a smoke test to validate PVCs work
@@ -35,11 +35,6 @@ test-zarf-package: ## Run a smoke test to validate PVCs work
 	kubectl apply -f test-manifests.yaml
 	kubectl wait --for=jsonpath='{.status.phase}'=Bound -n test pvc/test-pvc
 	kubectl wait --for=condition=Ready -n test pod/test-pod --timeout=1m
-
-.PHONY: zarf-init
-zarf-init: ## Zarf init.
-	zarf tools download-init -a amd64
-	zarf init --confirm -a amd64
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with terraform
@@ -84,7 +79,7 @@ delete-dev-cluster: ## Delete the test cluster with terraform using dev-rke2.tfv
 	terraform destroy -auto-approve -var-file=dev-rke2.tfvars
 
 .PHONY: dev-deploy
-dev-deploy: create-dev-cluster zarf-init create-zarf-package deploy-zarf-package ## Create cluster and deploy package for dev
+dev-deploy: create-dev-cluster create-zarf-package deploy-zarf-package ## Create cluster and deploy package for dev
 
 .PHONY: test-dev-e2e
-test-dev-e2e: create-dev-cluster zarf-init create-zarf-package deploy-zarf-package test-zarf-package delete-dev-cluster ## Run an e2e test for dev
+test-dev-e2e: create-dev-cluster create-zarf-package deploy-zarf-package test-zarf-package delete-dev-cluster ## Run an e2e test for dev
