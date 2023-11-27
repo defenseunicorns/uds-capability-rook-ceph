@@ -62,7 +62,7 @@ components:
         valuesFiles:
           - values/operator-values.yaml
     images:
-      - registry1.dso.mil/ironbank/rook/ceph:v1.12.7
+      - registry1.dso.mil/ironbank/rook/ceph:v1.12.8
   - name: rook-ceph-cluster
     required: true
     actions:
@@ -125,7 +125,7 @@ components:
         valuesFiles:
           - values/cluster-values.yaml
     images:
-      - registry1.dso.mil/ironbank/rook/ceph:v1.12.7
+      - registry1.dso.mil/ironbank/rook/ceph:v1.12.8
       - quay.io/ceph/ceph:v18.2.0
       - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.1
