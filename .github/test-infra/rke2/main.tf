@@ -8,7 +8,7 @@ terraform {
 }
 
 module "rke2" {
-  source        = "github.com/rancherfederal/rke2-aws-tf?ref=v2.4.0"
+  source        = "github.com/rancherfederal/rke2-aws-tf?ref=v2.4.2"
   cluster_name  = var.name
   vpc_id        = var.vpc_id
   subnets       = var.public_subnets
@@ -45,7 +45,7 @@ EOF
 }
 
 module "agents" {
-  source = "github.com/rancherfederal/rke2-aws-tf//modules/agent-nodepool?ref=v2.4.0"
+  source = "github.com/rancherfederal/rke2-aws-tf//modules/agent-nodepool?ref=v2.4.2"
 
   name          = "agent"
   vpc_id        = var.vpc_id
