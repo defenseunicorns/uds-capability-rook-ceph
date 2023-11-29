@@ -1,7 +1,7 @@
 image:
   repository: ###ZARF_REGISTRY###/ironbank/rook/ceph
   # renovate: image=registry1.dso.mil/ironbank/rook/ceph
-  tag: v1.12.7
+  tag: v1.12.8
 
 csi:
   cephFSKernelMountOptions: "ms_mode=secure"
