@@ -13,42 +13,6 @@ variables:
     description: "Regular expression matching all devices to use for Ceph storage, example '^sd.'"
     default: ""
     prompt: false
-  - name: PRIVILEGED_HOSTPATH
-    description: "Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions."
-    default: "false"
-    prompt: false
-  - name: POOL_SIZE
-    description: "Sets OSD pool size"
-    default: "3"
-    prompt: false
-  - name: MIN_POOL_SIZE
-    description: "Sets minimum OSD pool size"
-    default: "2"
-    prompt: false
-  - name: NO_REDUNDANCY_WARNING
-    description: "When set to true, will warn if there is no redundancy"
-    default: "true"
-    prompt: false
-  - name: BLUEFS_BUFFERED_IO
-    description: "Set to false if running on single node"
-    default: "true"
-    prompt: false
-  - name: MON_COUNT
-    description: "Set to 1 if running on single node"
-    default: "3"
-    prompt: false
-  - name: MON_ALLOW_MULTI_PER_NODE
-    description: "Set to true if running on single node"
-    default: "false"
-    prompt: false
-  - name: MGR_COUNT
-    description: "Set to 1 if running on single node"
-    default: "2"
-    prompt: false
-  - name: MGR_ALLOW_MULTI_PER_NODE
-    description: "Set to true if running on single node"
-    default: "false"
-    prompt: false
 
 components:
   - name: rook-ceph-images

@@ -1,0 +1,13 @@
+configOverride: |
+  [global]
+  osd_pool_default_size = 1
+  osd_pool_default_min_size = 1
+  mon_warn_on_pool_no_redundancy = false
+  bluefs_buffered_io = false
+cephClusterSpec:
+  mon:
+    count: 1
+    allowMultiplePerNode: true
+  mgr:
+    count: 1
+    allowMultiplePerNode: true
