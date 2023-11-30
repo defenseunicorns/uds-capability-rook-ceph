@@ -51,9 +51,9 @@ components:
     charts:
       # renovate: datasource=helm
       - name: rook-ceph-cluster
+        url: https://charts.rook.io/release
         version: v1.12.8
         namespace: rook-ceph
-        url: https://charts.rook.io/release
         valuesFiles:
           - ../values/cluster-values.yaml
     actions:
