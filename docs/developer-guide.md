@@ -16,10 +16,10 @@ Prerequisites:
 - active shell has access to your target AWS environment
 - `make` 3.82 or higher installed (check with `make --version`)
 
-Using the make targets you can run the same commands as CI:
-```
+Using the make targets you can run the same commands as CI to build, deploy, and test the custom init package:
+```console
 make create-dev-cluster # Note that this will overwrite your default kubeconfig
-make create-zarf-package extra_create_args="--skip-sbom"
+make create-zarf-package
 make deploy-zarf-package
 # At this point your cluster should be created with rook/ceph deployed on top
 # You can perform your own testing/validation or use the simple make smoketest

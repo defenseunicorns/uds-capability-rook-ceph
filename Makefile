@@ -12,18 +12,18 @@ help: ## Show this help message.
 
 .PHONY: create-zarf-package
 create-zarf-package: ## Build the zarf package.
-	zarf package create $(extra_create_args) --confirm
+	zarf package create --set AGENT_IMAGE_TAG=$$(zarf version) --confirm
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf init --confirm
+	zarf init --confirm -a amd64
 
 .PHONY: publish-zarf-init-package
-publish-zarf-init-package: ## Publish the zarf init package and skeleton.
+publish-zarf-init-package: ## Publish the zarf custom init package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
 	zarf package publish . oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
-	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-amd64 ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-$(jq -r '.["."]' .release-please-manifest.json)-amd64
-	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-skeleton ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-$(jq -r '.["."]' .release-please-manifest.json)-skeleton
+	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$$(zarf version)-amd64 ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$$(zarf version)-$$(jq -r '.["."]' .release-please-manifest.json)-amd64
+	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$$(zarf version)-skeleton ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$$(zarf version)-$$(jq -r '.["."]' .release-please-manifest.json)-skeleton
 
 .PHONY: publish-zarf-standard-package
 publish-zarf-standard-package: ## Publish the zarf standard package and skeleton.
@@ -34,9 +34,10 @@ publish-zarf-standard-package: ## Publish the zarf standard package and skeleton
 
 .PHONY: remove-zarf-package
 remove-zarf-package: ## Remove the zarf package.
-	kubectl delete pod -n test test-pod --ignore-not-found
-	kubectl delete pvc -n test test-pvc --ignore-not-found
+	kubectl -n rook-ceph patch cephcluster rook-ceph --type merge -p '{"spec":{"cleanupPolicy":{"confirmation":"yes-really-destroy-data"}}}'
 	zarf destroy --confirm
+	helm uninstall rook-ceph-cluster -n rook-ceph --wait
+	helm uninstall rook-ceph -n rook-ceph --wait
 
 .PHONY: test-zarf-package
 test-zarf-package: ## Run a smoke test to validate PVCs work
@@ -44,6 +45,8 @@ test-zarf-package: ## Run a smoke test to validate PVCs work
 	kubectl apply -f test-manifests.yaml
 	kubectl wait --for=jsonpath='{.status.phase}'=Bound -n test pvc/test-pvc
 	kubectl wait --for=condition=Ready -n test pod/test-pod --timeout=1m
+	kubectl delete pod -n test test-pod
+	kubectl delete pvc -n test test-pvc
 
 .PHONY: create-cluster
 create-cluster: ## Create a test cluster with terraform
@@ -54,8 +57,6 @@ create-cluster: ## Create a test cluster with terraform
 		-backend-config="region=us-west-2" \
 		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
 	terraform apply -auto-approve
-	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
-	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 .PHONY: create-dev-cluster
 create-dev-cluster: ## Create a test cluster with terraform using dev-rke2.tfvars
@@ -66,8 +67,6 @@ create-dev-cluster: ## Create a test cluster with terraform using dev-rke2.tfvar
 		-backend-config="region=us-west-2" \
 		-backend-config="dynamodb_table=uds-dev-state-dynamodb"
 	terraform apply -auto-approve -var-file=dev-rke2.tfvars
-	kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
-	kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 .PHONY: debug-output
 debug-output: ## Debug Output for help in CI

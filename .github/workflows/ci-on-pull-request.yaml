@@ -45,12 +45,11 @@ jobs:
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.31.2
+          version: v0.31.3
           download-init-package: true
 
       - name: Create Package
-        # Skip SBOM since package is used for internal testing, not publishing
-        run: make create-zarf-package extra_create_args="--skip-sbom"
+        run: make create-zarf-package
 
       - name: Create Cluster
         env:
