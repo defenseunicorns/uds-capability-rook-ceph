@@ -59,10 +59,10 @@ This variable can be setup in your zarf config file under the `package.deploy.se
 
 To deploy the package either follow the steps from above to build it, or pull the published version. Note that two versions are published to OCI:
 - `vX.X.X`: This is a version that lines up with your zarf version. If you want the latest rook ceph for a given zarf version pull this way.
-- `X.X.X` (no v): This is versioned in line with the changelog and releases on this repo. It does require more awareness of what zarf version is used/supported but gives more flexibility on exact versioning.
+- `vX.X.X-Y.Y.Y`: The first version (`vX.X.X`) is in line with your zarf version. The suffixed version (`Y.Y.Y`) is in line with the changelog and releases on this repo.
 
 ```console
-zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:v0.0.7 # Modify version as needed
+zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:v0.31.1-0.0.7 # Example version, make sure to check releases!
 ```
 
 Once you have the package locally, init like you would with the standard init package:
@@ -75,7 +75,7 @@ zarf init --confirm # Optionally add --set values here
 Deploying the standard package is as easy as any other zarf package:
 
 ```console
-zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph:v0.0.7 --confirm # Modify version as needed
+zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph:0.0.7 --confirm # Example version, make sure to check releases!
 ```
 
 ## Storage Provisioning
