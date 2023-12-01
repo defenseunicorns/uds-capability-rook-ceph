@@ -22,6 +22,15 @@ deploy-zarf-package: ## Deploy the zarf package.
 publish-zarf-init-package: ## Publish the zarf init package and skeleton.
 	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
 	zarf package publish . oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph
+	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-amd64 ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(jq -r '.["."]' .release-please-manifest.json)-amd64
+	zarf tools registry copy ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(zarf version)-skeleton ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:$(jq -r '.["."]' .release-please-manifest.json)-skeleton
+
+.PHONY: publish-zarf-standard-package
+publish-zarf-standard-package: ## Publish the zarf standard package and skeleton.
+	cd rook-ceph
+	zarf package create --confirm
+	zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability
+	zarf package publish . oci://ghcr.io/defenseunicorns/uds-capability
 
 .PHONY: remove-zarf-package
 remove-zarf-package: ## Remove the zarf package.

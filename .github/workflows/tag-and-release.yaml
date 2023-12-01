@@ -21,6 +21,10 @@ jobs:
         run: echo "release_created=${{ steps.tag.outputs.release_created || false }}" >> $GITHUB_OUTPUT
 
   publish-rook-ceph:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     needs: tag-new-version
     if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     uses: ./.github/workflows/publish-package.yaml

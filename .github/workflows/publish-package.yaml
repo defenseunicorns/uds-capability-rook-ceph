@@ -73,3 +73,7 @@ jobs:
       - name: Publish Zarf Init Package
         run: make publish-zarf-init-package
         timeout-minutes: 60
+
+      - name: Publish Zarf Standard Package
+        run: make publish-zarf-standard-package
+        timeout-minutes: 60
