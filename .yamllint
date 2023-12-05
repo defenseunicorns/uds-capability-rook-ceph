@@ -3,7 +3,10 @@ yaml-files:
   - '.yamllint'
 
 ignore:
+  # Ignore generated terraform yaml
   - '**/.terraform/*'
+  # Ignore helm templates
+  - '**/chart/templates/*'
 
 rules:
   anchors: enable

@@ -4,7 +4,7 @@ metadata:
   description: "UDS Rook Ceph Custom Zarf Init Package for dev"
   architecture: amd64
 
-components:  
+components:
   # This package moves the injector & registries binaries
   - name: zarf-injector
     required: true
