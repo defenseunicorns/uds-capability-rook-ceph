@@ -1,0 +1,38 @@
+{{- if .Values.cephBlockPool.enabled }}
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: ceph-blockpool
+  namespace: {{ .Release.Namespace }} # namespace:cluster
+spec:
+  {{- toYaml .Values.cephBlockPool.spec | nindent 2 }}
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ceph-block
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "{{ .Values.cephBlockPool.storageClass.isDefault }}"
+provisioner: rook-ceph.rbd.csi.ceph.com
+parameters:
+  pool: ceph-blockpool
+  clusterID: {{ .Release.Namespace }}
+{{- with .Values.cephBlockPool.storageClass.parameters }}
+  {{- tpl (toYaml .) $ | nindent 2 }}
+{{- end }}
+reclaimPolicy: {{ .Values.cephBlockPool.storageClass.reclaimPolicy }}
+allowVolumeExpansion: {{ .Values.cephBlockPool.storageClass.allowVolumeExpansion }}
+volumeBindingMode: {{.Values.cephBlockPool.storageClass.volumeBindingMode }}
+{{- if .Values.cephBlockPool.storageClass.mountOptions }}
+mountOptions:
+  {{- range .Values.cephBlockPool.storageClass.mountOptions }}
+  - {{ . }}
+  {{- end }}
+{{- end }}
+{{- if .Values.cephBlockPool.storageClass.allowedTopologies }}
+allowedTopologies:
+{{- with .Values.cephBlockPool.storageClass.allowedTopologies }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}
+{{- end }}

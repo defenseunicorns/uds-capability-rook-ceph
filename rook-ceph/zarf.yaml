@@ -19,7 +19,7 @@ components:
     required: true
     description: Push rook ceph images to the zarf registry
     images:
-      # - registry1.dso.mil/ironbank/rook/ceph:v1.12.8
+      # - registry1.dso.mil/ironbank/rook/ceph:v1.12.9
       - rook/ceph:v1.12.9
       - quay.io/ceph/ceph:v18.2.0
       - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
@@ -68,6 +68,18 @@ components:
                 namespace: rook-ceph
             maxTotalSeconds: 600
             description: Waiting for ceph cluster to be ready
+
+  - name: uds-rook-ceph-config
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: uds-rook-ceph-config
+        version: 0.1.0
+        namespace: rook-ceph
+        localPath: ../chart
+    actions:
+      onDeploy:
+        after:
           - wait:
               cluster:
                 kind: cephblockpool

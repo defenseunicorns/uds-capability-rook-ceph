@@ -19,3 +19,8 @@ cephClusterSpec:
 
 imagePullSecrets:
   - name: private-registry
+
+# UDS Rook-Ceph Config chart is used to deploy the below resources so defaults are nulled out
+cephBlockPools: []
+cephFileSystems: []
+cephObjectStores: []

@@ -28,6 +28,24 @@ components:
       - name: docker-registry
         valuesFiles:
           - values/registry-values.yaml
+    # On upgrades ensure we retain the existing PV
+    actions:
+      onDeploy:
+        before:
+          - description: Set persistence for upgrade seed registry
+            cmd: ./zarf tools kubectl get pvc zarf-docker-registry -n zarf >/dev/null 2>&1 && echo true || echo false
+            mute: true
+            setVariables:
+              - name: UPGRADE_PERSISTENCE
+          - description: Set env vars for upgrade seed registry
+            mute: true
+            cmd: |
+              ./zarf tools kubectl get pvc zarf-docker-registry -n zarf >/dev/null 2>&1 && \
+              echo "" || \
+              echo -e "- name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY\n  value: \"/var/lib/registry\""
+            setVariables:
+              - name: UPGRADE_ENV_VARS
+                autoIndent: true
 
   # Push rook/ceph images to seed-registry
   - name: rook-ceph-images-initial
@@ -41,14 +59,18 @@ components:
     required: true
     import:
       path: rook-ceph
-      name: rook-ceph-operator
 
   # Deploy rook/ceph cluster
   - name: rook-ceph-cluster
     required: true
     import:
       path: rook-ceph
-      name: rook-ceph-cluster
+
+  # Deploy UDS rook/ceph config
+  - name: uds-rook-ceph-config
+    required: true
+    import:
+      path: rook-ceph
 
   # Creates the permanent registry
   - name: zarf-registry

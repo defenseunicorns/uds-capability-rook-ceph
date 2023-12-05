@@ -1,0 +1,69 @@
+kind: ZarfInitConfig
+metadata:
+  name: init
+  description: "UDS Rook Ceph Custom Zarf Init Package for dev"
+  architecture: amd64
+
+components:  
+  # This package moves the injector & registries binaries
+  - name: zarf-injector
+    required: true
+    import:
+      path: ../../../
+
+  # Creates the temporary seed-registry
+  - name: zarf-seed-registry
+    required: true
+    import:
+      path: ../../../
+
+  # Push rook/ceph images to seed-registry
+  - name: rook-ceph-images-initial
+    required: true
+    import:
+      path: ../../../
+
+  # Deploy rook/ceph operator
+  - name: rook-ceph-operator
+    required: true
+    import:
+      path: ../../../
+
+  # Deploy rook/ceph cluster
+  - name: rook-ceph-cluster
+    required: true
+    import:
+      path: ../../../
+    charts:
+      - name: rook-ceph-cluster
+        valuesFiles:
+          - ../../../values/dev-cluster-values.yaml
+
+  # Deploy UDS rook/ceph config
+  - name: uds-rook-ceph-config
+    required: true
+    import:
+      path: ../../../
+
+  # Creates the permanent registry
+  - name: zarf-registry
+    required: true
+    import:
+      path: ../../../
+
+  # Push rook/ceph (and registry) images to permanent registry
+  - name: rook-ceph-images
+    required: true
+    import:
+      path: ../../../
+
+  # Creates the pod+git mutating webhook
+  - name: zarf-agent
+    required: true
+    import:
+      path: ../../../
+
+  # (Optional) Adds a git server to the cluster
+  - name: git-server
+    import:
+      path: ../../../

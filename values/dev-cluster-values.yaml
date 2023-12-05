@@ -8,6 +8,13 @@ cephClusterSpec:
   mon:
     count: 1
     allowMultiplePerNode: true
+    # WIP: Support local-path PVs as storage for Ceph
+    # volumeClaimTemplate:
+    #   spec:
+    #     storageClassName: local-path
+    #     resources:
+    #       requests:
+    #         storage: 10Gi
   mgr:
     count: 1
     allowMultiplePerNode: true
