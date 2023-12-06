@@ -1,0 +1,33 @@
+{{- if .Values.cephFileSystem.enabled }}
+apiVersion: ceph.rook.io/v1
+kind: CephFilesystem
+metadata:
+  name: ceph-filesystem
+  namespace: {{ .Release.Namespace }} # namespace:cluster
+spec:
+  {{- toYaml .Values.cephFileSystem.spec | nindent 2 }}
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ceph-filesystem
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "{{ .Values.cephFileSystem.storageClass.isDefault }}"
+provisioner: rook-ceph.cephfs.csi.ceph.com
+parameters:
+  fsName: ceph-filesystem
+  pool: ceph-filesystem-{{ default "data0" .Values.cephFileSystem.storageClass.pool }}
+  clusterID: {{ .Release.Namespace }}
+{{- with .Values.cephFileSystem.storageClass.parameters }}
+  {{- tpl (toYaml .) $ | nindent 2 }}
+{{- end }}
+reclaimPolicy: {{.Values.cephFileSystem.storageClass.reclaimPolicy }}
+allowVolumeExpansion: {{ .Values.cephFileSystem.storageClass.allowVolumeExpansion }}
+volumeBindingMode: {{ .Values.cephFileSystem.storageClass.volumeBindingMode }}
+{{- if .Values.cephFileSystem.storageClass.mountOptions }}
+mountOptions:
+  {{- range .Values.cephFileSystem.storageClass.mountOptions }}
+  - {{ . }}
+  {{- end }}
+{{- end }}
+{{- end }}

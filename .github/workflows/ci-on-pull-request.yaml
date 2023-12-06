@@ -49,16 +49,12 @@ jobs:
           download-init-package: true
 
       - name: Create Package
-        # Skip SBOM since package is used for internal testing, not publishing
-        run: make create-zarf-package extra_create_args="--skip-sbom"
+        run: make create-zarf-package
 
       - name: Create Cluster
         env:
           SHA: ${{ github.sha }}
         run: make create-cluster short_sha="${SHA:0:7}"
-
-      - name: Zarf Init
-        run: make zarf-init
 
       - name: Deploy Package
         run: make deploy-zarf-package

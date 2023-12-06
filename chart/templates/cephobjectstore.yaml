@@ -1,0 +1,23 @@
+{{- if .Values.cephObjectStore.enabled }}
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStore
+metadata:
+  name: ceph-objectstore
+  namespace: {{ .Release.Namespace }} # namespace:cluster
+spec:
+  {{- toYaml .Values.cephObjectStore.spec | nindent 2 }}
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ceph-bucket
+provisioner: rook-ceph.ceph.rook.io/bucket
+reclaimPolicy: {{ .Values.cephObjectStore.storageClass.reclaimPolicy }}
+volumeBindingMode: {{ .Values.cephObjectStore.storageClass.volumeBindingMode }}
+parameters:
+  objectStoreName: ceph-objectstore
+  objectStoreNamespace: {{ .Release.Namespace }}
+{{- with .Values.cephObjectStore.storageClass.parameters }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}

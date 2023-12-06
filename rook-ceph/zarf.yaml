@@ -1,0 +1,122 @@
+kind: ZarfPackageConfig
+metadata:
+  name: rook-ceph
+  description: "UDS Package Rook Ceph"
+  # x-release-please-start-version
+  version: "0.0.7"
+  # x-release-please-end
+  architecture: amd64
+  authors: "@mjnagel @andrewg-xyz"
+
+variables:
+  - name: DEVICE_FILTER
+    description: "Regular expression matching all devices to use for Ceph storage, example '^sd.'"
+    default: ""
+    prompt: false
+
+components:
+  - name: rook-ceph-images
+    required: true
+    description: Push rook ceph images to the zarf registry
+    images:
+      # - registry1.dso.mil/ironbank/rook/ceph:v1.12.9
+      - rook/ceph:v1.12.9
+      - quay.io/ceph/ceph:v18.2.0
+      - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.9.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.9.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v3.6.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.3.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.4.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.2
+
+  - name: rook-ceph-operator
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: rook-ceph
+        url: https://charts.rook.io/release
+        version: v1.12.9
+        namespace: rook-ceph
+        valuesFiles:
+          - ../values/operator-values.yaml
+    # This action is a workaround to https://github.com/rook/rook/issues/12786
+    actions:
+      onDeploy:
+        after:
+          - cmd: |
+              ./zarf tools kubectl patch serviceaccount default -n rook-ceph -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
+            description: "Add pull secrets for rook/ceph cluster"
+
+  - name: rook-ceph-cluster
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: rook-ceph-cluster
+        url: https://charts.rook.io/release
+        version: v1.12.9
+        namespace: rook-ceph
+        valuesFiles:
+          - ../values/cluster-values.yaml
+    actions:
+      onDeploy:
+        after:
+          - wait:
+              cluster:
+                kind: cephcluster
+                name: rook-ceph
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph cluster to be ready
+
+  - name: uds-rook-ceph-config
+    required: true
+    charts:
+      # renovate: datasource=helm
+      - name: uds-rook-ceph-config
+        version: 0.1.0
+        namespace: rook-ceph
+        localPath: ../chart
+    actions:
+      onDeploy:
+        after:
+          - wait:
+              cluster:
+                kind: cephblockpool
+                name: ceph-blockpool
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph blockpool to be ready
+          - wait:
+              cluster:
+                kind: cephfilesystem
+                name: ceph-filesystem
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph filesystem to be ready
+          - wait:
+              cluster:
+                kind: cephobjectstore
+                name: ceph-objectstore
+                condition: "'{.status.phase}'=Ready"
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for ceph objectstore to be ready
+          - wait:
+              cluster:
+                kind: deployment
+                name: csi-rbdplugin-provisioner
+                condition: available
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for CSI RDB provisioner to be available
+          - wait:
+              cluster:
+                kind: deployment
+                name: csi-cephfsplugin-provisioner
+                condition: available
+                namespace: rook-ceph
+            maxTotalSeconds: 600
+            description: Waiting for CSI CephFS provisioner to be available
