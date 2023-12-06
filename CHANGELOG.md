@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.0](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.8...v0.1.0) (2023-12-06)
+
+This release is identical to 0.0.8 and only includes a fix for CI publishing workflows.
+
+### Bug Fixes
+
+* CI for publishing [skip ci] ([#81](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/81)) ([b4f3320](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/b4f332062b19ca6266b5770a1bbf3c7d25edcd00))
+
 ## [0.0.8](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.7...v0.0.8) (2023-12-06)
 
 
