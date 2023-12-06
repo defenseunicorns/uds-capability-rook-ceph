@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.0.8](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.7...v0.0.8) (2023-12-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* refactor to custom init package ([#78](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/78))
+
+### Features
+
+* refactor to custom init package ([#78](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/78)) ([b1f33af](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/b1f33af5d3d7803df509c0ca230c4e29f27e86a9))
+
+
+### Miscellaneous
+
+* add commitlint ([#59](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/59)) ([624ccef](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/624ccef8633362d41980cdfdcd81be6b9a6c20c4))
+* changed waits to native zarf wait actions ([#67](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/67)) ([8cfe713](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/8cfe713ff27ed4bbedddbbcdff2898d1feb2f773))
+* **deps:** update dependency defenseunicorns/zarf to v0.31.1 ([#60](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/60)) ([40063dd](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/40063dd14f1580ab3d13eddc25fbf1b1de715da3))
+* **deps:** update dependency defenseunicorns/zarf to v0.31.2 ([#72](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/72)) ([c338a47](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/c338a476acfb231ff8a7d2856642616c1fd80079))
+* **deps:** update dependency defenseunicorns/zarf to v0.31.3 ([#75](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/75)) ([8c0e0f1](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/8c0e0f1ee03ed72be08e96764bce77b9097f8cdd))
+* **deps:** update docker image registry.k8s.io/sig-storage/csi-resizer to v1.9.2 ([#62](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/62)) ([5d34b9b](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/5d34b9b120f742e7d1338e3008810016118c93d6))
+* **deps:** update docker image registry.k8s.io/sig-storage/csi-snapshotter to v6.3.2 ([#61](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/61)) ([5ef1f33](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/5ef1f33f07c4a9f05a785c72f836aae4ec263867))
+* **deps:** update docker image registry1.dso.mil/.../csi-node-driver-registrar to v2.9.1 ([#69](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/69)) ([ca62f13](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/ca62f13f4bc6c8ef2be47c72b29f7bb02745481f))
+* **deps:** update docker image registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher to v4.4.2 ([#63](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/63)) ([4372465](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/43724656fb6332fbdf6251e57234831a8ad08bb6))
+* **deps:** update docker image registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner to v3.6.2 ([#64](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/64)) ([c52b987](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/c52b9876d1711b360f1c0283312ee926bba0c777))
+* **deps:** update docker image registry1.dso.mil/ironbank/rook/ceph to v1.12.8 ([#71](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/71)) ([8c3617e](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/8c3617eced13c5be74d0683bdc9fb54da7b05167))
+* **deps:** update helm chart rook-ceph to v1.12.8 ([#70](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/70)) ([7c68e87](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/7c68e878d57310b3053e9b601bde91c69d3d3a25))
+
 ## [0.0.7](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.6...v0.0.7) (2023-11-03)
 
 
