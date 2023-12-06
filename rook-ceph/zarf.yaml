@@ -3,7 +3,7 @@ metadata:
   name: rook-ceph
   description: "UDS Package Rook Ceph"
   # x-release-please-start-version
-  version: "0.0.8"
+  version: "0.1.0"
   # x-release-please-end
   architecture: amd64
   authors: "@mjnagel @andrewg-xyz"
