@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.1.0...v0.1.1) (2023-12-11)
+
+### Miscellaneous
+
+* switch rook to IB image ([#85](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/85)) ([1fbb55b](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/1fbb55b76099729e6b79762c89803bbae6775a14))
+
 ## [0.1.0](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.0.8...v0.1.0) (2023-12-06)
 
 This release is identical to 0.0.8 and only includes a fix for CI publishing workflows.
