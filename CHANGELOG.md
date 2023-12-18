@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.3](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.1.2...v0.1.3) (2023-12-18)
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#89](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/89)) ([ab20d95](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/ab20d95df6678dc5ad2ed5eb931c52df24168976))
+* **deps:** update all dependencies ([#92](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/92)) ([4fe2c31](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/4fe2c3184e282989cfc02f9f9c8bbeea762a1246))
+* **deps:** update docker image registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar to v2.9.2 ([#94](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/94)) ([ba43b4a](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/ba43b4a1d67e9fc678a8211088956fa5e6cfc52d))
+* update to latest IB creds for renovate [skip ci] ([#90](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/90)) ([1fda089](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/1fda089fba86127719493b3e75063f15b5e3253e))
+
 ## [0.1.2](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.1.1...v0.1.2) (2023-12-13)
 
 
