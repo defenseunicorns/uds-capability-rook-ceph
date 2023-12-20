@@ -45,7 +45,7 @@ jobs:
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.31.4
+          version: v0.32.0
           download-init-package: true
 
       - name: Create Package
