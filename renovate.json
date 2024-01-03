@@ -3,7 +3,6 @@
   "forkProcessing": "enabled",
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
     ":dependencyDashboard",
     "group:all"
   ],
@@ -11,7 +10,6 @@
   "dependencyDashboard": true,
   "platform": "github",
   "onboarding": false,
-  "requireConfig": false,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "rebaseWhen": "conflicted",
   "commitBodyTable": true,
