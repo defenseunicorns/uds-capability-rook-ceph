@@ -66,7 +66,7 @@ To deploy the package either follow the steps from above to build it, or pull th
 
 First pull the package if using the published release (skip if you have the package built locally):
 ```console
-zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:v0.31.3-0.0.8 # Example version, make sure to check releases!
+zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph/init:v0.31.4-0.1.3 # Example version, make sure to check releases!
 ```
 
 Once you have the package locally, init like you would with the standard init package:
@@ -79,7 +79,7 @@ zarf init --confirm # Optionally add --set values here
 Deploying the standard package is as easy as any other zarf package. Note that versioning for the standard package is standard semver based on the release/changelog in the repo since it is not dependent on zarf versioning. To deploy from OCI:
 
 ```console
-zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph:0.0.8 --confirm # Example version, make sure to check releases!
+zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/rook-ceph:0.1.3 --confirm # Example version, make sure to check releases!
 ```
 
 ## Usage
