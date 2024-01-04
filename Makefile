@@ -16,7 +16,7 @@ create-zarf-package: ## Build the zarf package.
 
 .PHONY: deploy-zarf-package
 deploy-zarf-package: ## Deploy the zarf package.
-	zarf init --confirm -a amd64
+	zarf init --components git-server --confirm -a amd64
 
 .PHONY: publish-zarf-init-package
 publish-zarf-init-package: ## Publish the zarf custom init package and skeleton.
