@@ -75,7 +75,7 @@
     },
     {
       "fileMatch": ["\\.*\\.ya?ml$"],
-      "matchStrings": ["url:\\s*oci://ghcr.io/defenseunicorns/packages/init:(?<currentValue>v\\d+\\.\\d+\\.\\d+)-skeleton"],
+      "matchStrings": ["url:\\s*oci://ghcr.io/defenseunicorns/packages/init:(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "defenseunicorns/zarf",
       "versioningTemplate": "semver"
