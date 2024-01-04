@@ -10,7 +10,7 @@ There are two versions of this package provided:
 - A standard zarf package: Must be used on top of an already `zarf init`-ed cluster
 
 ## Pre-requisites
-- Zarf is installed locally with a minimum version of [v0.31.1](https://github.com/defenseunicorns/zarf/releases/tag/v0.31.1)
+- Zarf is installed locally with a minimum version of [v0.32.0](https://github.com/defenseunicorns/zarf/releases/tag/v0.32.0)
 - A working Kubernetes cluster on v1.26+ and a working kube context pointing to the cluster (or this package can be used to deploy a k3s cluster)
 - Cluster nodes meet the [requirements for Rook-Ceph](https://rook.github.io/docs/rook/v1.12/Getting-Started/Prerequisites/prerequisites/). In general:
   - Cluster nodes must have empty unformatted drives or partitions for Rook to configure for storage
