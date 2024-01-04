@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.1.3...v0.2.0) (2024-01-04)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/zarf to v0.32.0 ([#95](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/95)) ([abc6517](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/abc651724f73cb12d5ee7c52bac4b888ad7bb1c3))
+* **deps:** update dependency defenseunicorns/zarf to v0.32.1 ([#97](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/97)) ([e0b1789](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/e0b1789305186e7038a00364aef20df36f8b4c41))
+
 ## [0.1.3](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.1.2...v0.1.3) (2023-12-18)
 
 
