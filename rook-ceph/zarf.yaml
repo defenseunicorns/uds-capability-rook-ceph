@@ -26,7 +26,7 @@ components:
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v6.3.3
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.5.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.3
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.0
 
   - name: rook-ceph-operator
     required: true

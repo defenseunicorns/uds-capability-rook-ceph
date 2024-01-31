@@ -31,7 +31,7 @@ csi:
 
   resizer:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.9.3
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.0
 
 imagePullSecrets:
   - name: private-registry
