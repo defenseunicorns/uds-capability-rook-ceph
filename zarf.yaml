@@ -7,6 +7,13 @@ metadata:
   version: "0.2.1" # This version is not used by zarf, but is used for tracking with the published versions
   # x-release-please-end
 
+constants:
+  - name: REGISTRY_IMAGE
+    value: "###ZARF_PKG_TMPL_REGISTRY_IMAGE###"
+
+  - name: REGISTRY_IMAGE_TAG
+    value: "###ZARF_PKG_TMPL_REGISTRY_IMAGE_TAG###"
+
 components:
   # (Optional) Deploys a k3s cluster
   - name: k3s
@@ -24,6 +31,7 @@ components:
     required: true
     import:
       url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.2
+      name: zarf-registry
     charts:
       - name: docker-registry
         valuesFiles:

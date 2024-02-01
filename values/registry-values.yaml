@@ -1,3 +1,7 @@
+image:
+  repository: "###ZARF_SEED_REGISTRY###/###ZARF_CONST_REGISTRY_IMAGE###"
+  tag: "###ZARF_CONST_REGISTRY_IMAGE_TAG###"
+
 persistence:
   enabled: ###ZARF_VAR_UPGRADE_PERSISTENCE###
 
