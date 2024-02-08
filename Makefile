@@ -51,10 +51,10 @@ test-zarf-package: ## Run a smoke test to validate PVCs work
 create-cluster: ## Create a test cluster with terraform
 	cd .github/test-infra/rke2
 	terraform init -force-copy \
-		-backend-config="bucket=uds-ci-state-bucket" \
+		-backend-config="bucket=uds-aws-ci-commercial-us-west-2-5246-tfstate" \
 		-backend-config="key=tfstate/ci/install/uds-rook-$(short_sha)-rke2.tfstate" \
 		-backend-config="region=us-west-2" \
-		-backend-config="dynamodb_table=uds-ci-state-dynamodb"
+		-backend-config="dynamodb_table=uds-aws-ci-commercial-org-us-west-2-5246-tfstate-lock"
 	terraform apply -auto-approve
 
 .PHONY: create-dev-cluster
