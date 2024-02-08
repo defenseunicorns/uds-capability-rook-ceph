@@ -54,7 +54,7 @@ create-cluster: ## Create a test cluster with terraform
 		-backend-config="bucket=uds-aws-ci-commercial-us-west-2-5246-tfstate" \
 		-backend-config="key=tfstate/ci/install/uds-rook-$(short_sha)-rke2.tfstate" \
 		-backend-config="region=us-west-2" \
-		-backend-config="uds-aws-ci-commercial-org-us-west-2-5246-tfstate-lock"
+		-backend-config="dynamodb_table=uds-aws-ci-commercial-org-us-west-2-5246-tfstate-lock"
 	terraform apply -auto-approve
 
 .PHONY: create-dev-cluster
