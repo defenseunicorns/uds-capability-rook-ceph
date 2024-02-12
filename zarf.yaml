@@ -4,7 +4,7 @@ metadata:
   description: "UDS Rook Ceph Custom Zarf Init Package"
   architecture: amd64
   # x-release-please-start-version
-  version: "0.2.1" # This version is not used by zarf, but is used for tracking with the published versions
+  version: "0.2.2" # This version is not used by zarf, but is used for tracking with the published versions
   # x-release-please-end
 
 components:

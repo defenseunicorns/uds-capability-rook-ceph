@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.1...v0.2.2) (2024-02-12)
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies to v1.13.4 ([#106](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/106)) ([349ad80](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/349ad8091f3a0e1cda4b16a8bd0303b064c6915e))
+* **deps:** update docker image registry1.dso.mil/ironbank/opensource/ceph/ceph-csi to v3.10.1 ([#103](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/103)) ([13c118f](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/13c118f75a1c1be716a39b3a0a3d7bbb1aab994a))
+
 ## [0.2.1](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.0...v0.2.1) (2024-01-12)
 
 
