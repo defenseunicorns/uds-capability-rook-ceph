@@ -24,7 +24,7 @@ jobs:
           role-duration-seconds: 21600
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.5.7"
           terraform_wrapper: false
@@ -40,7 +40,7 @@ jobs:
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.32.1
+          version: v0.32.4
           download-init-package: true
 
       - name: Create Package
