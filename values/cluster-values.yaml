@@ -20,6 +20,11 @@ cephClusterSpec:
 imagePullSecrets:
   - name: private-registry
 
+# Installs a debugging toolbox deployment
+toolbox:
+  # -- Enable Ceph debugging pod deployment. See [toolbox](https://github.com/rook/rook/blob/master/Documentation/Troubleshooting/ceph-toolbox.md)
+  enabled: true
+
 # UDS Rook-Ceph Config chart is used to deploy the below resources so defaults are nulled out
 cephBlockPools: []
 cephFileSystems: []
