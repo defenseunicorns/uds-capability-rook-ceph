@@ -1,7 +1,7 @@
 cephClusterSpec:
   cephVersion:
     # renovate: image=quay.io/ceph/ceph
-    image: ###ZARF_REGISTRY###/ceph/ceph:v18.2.1
+    image: ###ZARF_REGISTRY###/ceph/ceph:v18.2.2
 
   network:
     # Use host networking to avoid CNI causing storage issues
