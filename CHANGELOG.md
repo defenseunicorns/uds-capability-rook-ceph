@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.4](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.3...v0.2.4) (2024-03-15)
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#114](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/114)) ([5d95266](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/5d95266824369b8969f356b519a68eaff0c3bbc3))
+* **deps:** update all dependencies ([#115](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/115)) ([9b3b627](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/9b3b6273c137b0b7aa223e55abd5f8a2d7996893))
+* update project code owners ([#112](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/112)) ([ce066d9](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/ce066d923000f5f7453ae2fd546e271dfed52917))
+
 ## [0.2.3](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.2...v0.2.3) (2024-03-06)
 
 
