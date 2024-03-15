@@ -19,9 +19,9 @@ components:
     required: true
     description: Push rook ceph images to the zarf registry
     images:
-      - quay.io/ceph/ceph:v18.2.1
-      - registry1.dso.mil/ironbank/rook/ceph:v1.13.5
-      - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.10.1
+      - quay.io/ceph/ceph:v18.2.2
+      - registry1.dso.mil/ironbank/rook/ceph:v1.13.6
+      - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.10.2
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.10.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.0
       - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v7.0.1
@@ -34,7 +34,7 @@ components:
       # renovate: datasource=helm
       - name: rook-ceph
         url: https://charts.rook.io/release
-        version: v1.13.5
+        version: v1.13.7
         namespace: rook-ceph
         valuesFiles:
           - ../values/operator-values.yaml
@@ -52,7 +52,7 @@ components:
       # renovate: datasource=helm
       - name: rook-ceph-cluster
         url: https://charts.rook.io/release
-        version: v1.13.5
+        version: v1.13.7
         namespace: rook-ceph
         valuesFiles:
           - ../values/cluster-values.yaml
