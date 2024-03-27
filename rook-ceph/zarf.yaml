@@ -20,13 +20,13 @@ components:
     description: Push rook ceph images to the zarf registry
     images:
       - quay.io/ceph/ceph:v18.2.2
-      - registry1.dso.mil/ironbank/rook/ceph:v1.13.6
+      - registry1.dso.mil/ironbank/rook/ceph:v1.13.7
       - registry1.dso.mil/ironbank/opensource/ceph/ceph-csi:v3.10.2
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.10.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v7.0.1
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.5.0
-      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.0
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.10.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v7.0.2
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.5.1
+      - registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.1
 
   - name: rook-ceph-operator
     required: true

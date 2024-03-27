@@ -1,7 +1,7 @@
 image:
   repository: ###ZARF_REGISTRY###/ironbank/rook/ceph
   # renovate: image=registry1.dso.mil/ironbank/rook/ceph
-  tag: v1.13.6
+  tag: v1.13.7
 
 csi:
   cephFSKernelMountOptions: "ms_mode=secure"
@@ -15,23 +15,23 @@ csi:
 
   registrar:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.10.0
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar:v2.10.1
 
   provisioner:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.0
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner:v4.0.1
 
   snapshotter:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v7.0.1
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-snapshotter:v7.0.2
 
   attacher:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.5.0
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-attacher:v4.5.1
 
   resizer:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer
-    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.0
+    image: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-resizer:v1.10.1
 
 imagePullSecrets:
   - name: private-registry
