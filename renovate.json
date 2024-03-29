@@ -151,9 +151,8 @@
       "labels": ["renovate/helm-release", "dependency/patch"]
     },
     {
-      "managers": ["terraform"],
-      "matchDepTypes": ["required_version"],
-      "allowedVersions": "< 1.0.0 || >= 1.6.0"
+      "matchPackageNames": ["terraform"],
+      "allowedVersions": "<1.6.0"
     }
   ]
 }
