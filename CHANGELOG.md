@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.5](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.4...v0.2.5) (2024-03-29)
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#118](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/118)) ([b24e991](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/b24e991fa55b65eeb6096195db249946d3619f39))
+* **deps:** update all dependencies ([#119](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/119)) ([8dc5d21](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/8dc5d216ad22ade1735692142358b5e652634b51))
+* update renovate config with allowed tf versions ([#121](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/121)) ([b9481db](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/b9481db0b6b94a8fa6dd8b9a9088741553ac9306))
+
 ## [0.2.4](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.3...v0.2.4) (2024-03-15)
 
 
