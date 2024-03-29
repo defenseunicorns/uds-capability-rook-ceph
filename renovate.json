@@ -149,6 +149,10 @@
       "datasources": ["helm"],
       "updateTypes": ["patch"],
       "labels": ["renovate/helm-release", "dependency/patch"]
+    },
+    {
+      "matchPackageNames": ["terraform"],
+      "allowedVersions": "<1.6.0"
     }
   ]
 }
