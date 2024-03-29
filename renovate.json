@@ -87,9 +87,6 @@
       "versioningTemplate": "semver"
     }
   ],
-  "terraform": {
-    "enabled": true
-  },
   "packageRules": [
     {
       "datasources": ["gitlab-tags"],
