@@ -87,6 +87,9 @@
       "versioningTemplate": "semver"
     }
   ],
+  "terraform": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "datasources": ["gitlab-tags"],
@@ -149,6 +152,11 @@
       "datasources": ["helm"],
       "updateTypes": ["patch"],
       "labels": ["renovate/helm-release", "dependency/patch"]
+    },
+    {
+      "managers": ["terraform"],
+      "matchDepTypes": ["required_version"],
+      "allowedVersions": "< 1.0.0 || >= 1.6.0"
     }
   ]
 }
