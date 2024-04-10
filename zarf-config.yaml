@@ -21,3 +21,8 @@ package:
       # -- Regular expression matching all devices to use for Ceph storage, example "^sd."
       # If not provided all unformatted devices and partitions will be formatted for Ceph.
       device_filter: ""
+      # HA configurations
+      is_ha_cluster: true
+      ha_replicas: 3
+      active_metadata_servers: 1
+      region: us-east-1

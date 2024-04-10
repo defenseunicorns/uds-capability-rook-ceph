@@ -6,7 +6,7 @@ cephBlockPool:
   spec:
     failureDomain: host
     replicated:
-      size: "###ZARF_VAR_HA_REPLICAS###"
+      size: ###ZARF_VAR_HA_REPLICAS###
     # Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false.
     # For reference: https://docs.ceph.com/docs/master/mgr/prometheus/#rbd-io-statistics
     # enableRBDStats: true
@@ -65,16 +65,16 @@ cephFileSystem:
   spec:
     metadataPool:
       replicated:
-        size: "###ZARF_VAR_HA_REPLICAS###"
+        size: ###ZARF_VAR_HA_REPLICAS###
     dataPools:
       - failureDomain: host
         replicated:
-          size: "###ZARF_VAR_HA_REPLICAS###"
+          size: ###ZARF_VAR_HA_REPLICAS###
         # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
         name: data0
     metadataServer:
       # Can be increased separately from the number of pools for HA
-      activeCount: "###ZARF_VAR_ACTIVE_METADATA_SERVERS###"
+      activeCount: ###ZARF_VAR_ACTIVE_METADATA_SERVERS###
       activeStandby: true
       resources:
         limits:
@@ -113,7 +113,7 @@ cephObjectStore:
     metadataPool:
       failureDomain: host
       replicated:
-        size: "###ZARF_VAR_HA_REPLICAS###"
+        size: ###ZARF_VAR_HA_REPLICAS###
     dataPool:
       failureDomain: host
       erasureCoded:
@@ -131,11 +131,11 @@ cephObjectStore:
           memory: "1Gi"
       # securePort: 443
       # sslCertificateRef:
-      instances: "###ZARF_VAR_HA_REPLICAS###"
+      instances: ###ZARF_VAR_HA_REPLICAS###
       priorityClassName: system-cluster-critical
   storageClass:
     reclaimPolicy: Retain
     volumeBindingMode: "Immediate"
     # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim.md#storageclass for available configuration
     parameters:
-      region: us-east-1
+      region: ###ZARF_VAR_REGION###

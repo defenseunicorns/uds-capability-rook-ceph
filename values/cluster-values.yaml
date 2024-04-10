@@ -15,20 +15,17 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     useAllDevices: true
-    deviceFilter: "###ZARF_VAR_DEVICE_FILTER###"
+    deviceFilter: ##ZARF_VAR_DEVICE_FILTER###
 
   mon:
-    count: "###ZARF_VAR_HA_REPLICAS###"
-    allowMultiplePerNode: "###ZARF_VAR_IS_HA_CLUSTER###"
+    count: ###ZARF_VAR_HA_REPLICAS###
+    allowMultiplePerNode: ###ZARF_VAR_IS_HA_CLUSTER###
 
   osd:
-    count: "###ZARF_VAR_HA_REPLICAS###"
+    count: ###ZARF_VAR_HA_REPLICAS###
 
   mgr:
-  count: "###ZARF_VAR_HA_REPLICAS###"
-  modules:
-    - enabled: true
-      name: pg_autoscaler
+    count: ###ZARF_VAR_HA_REPLICAS###
 
 imagePullSecrets:
   - name: private-registry
