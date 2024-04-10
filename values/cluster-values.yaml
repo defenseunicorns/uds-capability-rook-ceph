@@ -27,9 +27,8 @@ cephClusterSpec:
   mgr:
   count: "###ZARF_VAR_HA_REPLICAS###"
   modules:
-  - enabled: true
-    name: pg_autoscaler
-
+    - enabled: true
+      name: pg_autoscaler
 
 imagePullSecrets:
   - name: private-registry
