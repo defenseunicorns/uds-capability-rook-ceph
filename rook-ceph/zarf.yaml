@@ -29,7 +29,7 @@ variables:
     prompt: false
     pattern: "^[1-9][0-9]*$"
   - name: REGION
-    description: Region for storage class provisioning
+    description: Provisioning region
     default: us-east-1
     prompt: false
 
@@ -77,6 +77,20 @@ components:
           - ../values/cluster-values.yaml
     actions:
       onDeploy:
+        before:
+          - cmd: |
+              if [ "${ZARF_VAR_IS_HA_CLUSTER}" != "true" ]; then
+                echo "|
+                  [global]
+                  osd_pool_default_size = 1
+                  osd_pool_default_min_size = 1
+                  mon_warn_on_pool_no_redundancy = false
+                  bluefs_buffered_io = false"
+              else
+                echo null
+              fi
+            setVariables:
+              - name: SINGLE_NODE_CONFIG
         after:
           - wait:
               cluster:

@@ -1,3 +1,5 @@
+configOverride: ###ZARF_VAR_SINGLE_NODE_CONFIG###
+
 cephClusterSpec:
   cephVersion:
     # renovate: image=quay.io/ceph/ceph
