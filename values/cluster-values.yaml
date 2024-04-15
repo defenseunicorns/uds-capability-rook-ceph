@@ -6,6 +6,7 @@ cephClusterSpec:
   network:
     # Use host networking to avoid CNI causing storage issues
     provider: host
+    hostNetwork: true
     # Encrypt connections to/from storage
     connections:
       encryption:
