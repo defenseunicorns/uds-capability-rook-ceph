@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.5...v0.2.6) (2024-04-16)
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([#122](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/122)) ([a282fb6](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/a282fb6c66a5485fba9cb530df226c745262ca99))
+* **deps:** update docker image ghcr.io/stefanprodan/podinfo to v6.6.2 ([#125](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/125)) ([5150c2b](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/5150c2b9faf6fa603c0de258e6a14f09afea7d77))
+
 ## [0.2.5](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.4...v0.2.5) (2024-03-29)
 
 
