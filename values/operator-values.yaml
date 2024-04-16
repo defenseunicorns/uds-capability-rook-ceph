@@ -1,7 +1,7 @@
 image:
   repository: ###ZARF_REGISTRY###/ironbank/rook/ceph
   # renovate: image=registry1.dso.mil/ironbank/rook/ceph
-  tag: v1.13.7
+  tag: v1.14.0
 
 csi:
   cephFSKernelMountOptions: "ms_mode=secure"
@@ -11,7 +11,7 @@ csi:
 
   cephcsi:
     # renovate: image=registry1.dso.mil/ironbank/opensource/ceph/ceph-csi
-    image: ###ZARF_REGISTRY###/ironbank/opensource/ceph/ceph-csi:v3.10.2
+    image: ###ZARF_REGISTRY###/ironbank/opensource/ceph/ceph-csi:v3.11.0
 
   registrar:
     # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
