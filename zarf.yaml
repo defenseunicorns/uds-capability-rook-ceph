@@ -11,19 +11,19 @@ components:
   # (Optional) Deploys a k3s cluster
   - name: k3s
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # This package moves the injector & registries binaries
   - name: zarf-injector
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # Creates the temporary seed-registry
   - name: zarf-seed-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
     charts:
       - name: docker-registry
         valuesFiles:
@@ -77,7 +77,7 @@ components:
   - name: zarf-registry
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # Push rook/ceph (and registry) images to permanent registry
   - name: rook-ceph-images
@@ -91,9 +91,9 @@ components:
   - name: zarf-agent
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
 
   # (Optional) Adds a git server to the cluster
   - name: git-server
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/init:v0.32.6
+      url: oci://ghcr.io/defenseunicorns/packages/init:v0.33.0
