@@ -39,7 +39,13 @@ remove-zarf-package: ## Remove the zarf package.
 	helm uninstall rook-ceph -n rook-ceph --wait
 
 .PHONY: test-zarf-package
-test-zarf-package: ## Run a smoke test to validate PVCs work
+test-zarf-package: ## Run a smoke test for zarf registry usage and to validate PVCs work
+	@IMAGES=$$(kubectl get pods -n rook-ceph -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n' | sort | uniq); \
+	if echo "$$IMAGES" | grep -vq "127.0.0.1"; then \
+		echo "Error: Found images that don't come from the zarf registry"; \
+		echo "$$IMAGES" | grep -v "127.0.0.1"; \
+		exit 1; \
+	fi
 	cd .github/test-infra/storage
 	kubectl apply -f test-manifests.yaml
 	kubectl wait --for=jsonpath='{.status.phase}'=Bound -n test pvc/test-pvc
