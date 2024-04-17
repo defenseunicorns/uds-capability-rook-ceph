@@ -9,15 +9,15 @@ csi:
   readAffinity:
     enabled: true
 
-  # cephcsi:
-  #   repository: ###ZARF_REGISTRY###/ironbank/opensource/ceph/ceph-csi
-  #   # renovate: image=registry1.dso.mil/ironbank/opensource/ceph/ceph-csi
-  #   tag: v3.11.0
+  cephcsi:
+    repository: ###ZARF_REGISTRY###/ironbank/opensource/ceph/ceph-csi
+    # renovate: image=registry1.dso.mil/ironbank/opensource/ceph/ceph-csi
+    tag: v3.11.0
 
-  # registrar:
-  #   repository: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
-  #   # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
-  #   tag: v2.10.1
+  registrar:
+    repository: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
+    # renovate: image=registry1.dso.mil/ironbank/opensource/kubernetes-sigs/sig-storage/csi-node-driver-registrar
+    tag: v2.10.1
 
   provisioner:
     repository: ###ZARF_REGISTRY###/ironbank/opensource/kubernetes-sigs/sig-storage/csi-provisioner
