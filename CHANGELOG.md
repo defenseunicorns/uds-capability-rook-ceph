@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.7](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.6...v0.2.7) (2024-04-17)
+
+
+### Bug Fixes
+
+* update operator image values to match chart ([#128](https://github.com/defenseunicorns/uds-capability-rook-ceph/issues/128)) ([6579306](https://github.com/defenseunicorns/uds-capability-rook-ceph/commit/657930698ab11283083704ec5b67b38b8c37f1f6))
+
 ## [0.2.6](https://github.com/defenseunicorns/uds-capability-rook-ceph/compare/v0.2.5...v0.2.6) (2024-04-16)
 
 
