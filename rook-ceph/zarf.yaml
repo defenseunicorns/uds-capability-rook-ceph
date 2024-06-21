@@ -34,7 +34,7 @@ components:
       # renovate: datasource=helm
       - name: rook-ceph
         url: https://charts.rook.io/release
-        version: v1.14.0
+        version: v1.14.7
         namespace: rook-ceph
         valuesFiles:
           - ../values/operator-values.yaml
@@ -52,7 +52,7 @@ components:
       # renovate: datasource=helm
       - name: rook-ceph-cluster
         url: https://charts.rook.io/release
-        version: v1.14.0
+        version: v1.14.7
         namespace: rook-ceph
         valuesFiles:
           - ../values/cluster-values.yaml
